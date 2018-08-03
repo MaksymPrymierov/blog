@@ -1,0 +1,24 @@
+{{ define "write" }}
+
+{{ template "header" }}
+
+<div class="index flex-justify-between px-3 container-lg con-px-i">
+  <div class="con-info-index-panel con-pl-3 con-bb-2 position-relative">
+    <h2>Write New Post</h2>
+  </div>
+	<div class="con-content-panel con-pl-3 position-relative">
+    <form class="post-form con-post" id="new-post" action="/" accept-charset="UTF-8" method="post">
+      <input type="text" class="form-control input-block input-contrast" name="Title post" value aria-label="Title post" placeholder="Title post..." autocomplete="off">
+      <div class="post-elements">
+        <textarea id="post_contents" class="form-control file-editor-textarea" rows="17" name="Content post" data-codemirror-mode data-allow-unchanged="true" placeholder="Write text here" aria-label="Write text here"></textarea>
+      </div>
+      <div class="post-elements post-end">
+        <button type="button" class="btn float-left">Create Post</button>
+      </div>
+    <form>
+	</div>
+</div>
+
+{{ template "footer" }}
+
+{{ end }}
