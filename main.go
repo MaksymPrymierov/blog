@@ -1,8 +1,8 @@
 package main
 
 import (
-	modules "./modules"
 	"fmt"
+	"github.com/connor41/blog/modules"
 	"html/template"
 	"net/http"
 )
@@ -27,17 +27,17 @@ func writeHadler(w http.ResponseWriter, r *http.Request) {
 }
 
 func createPostHadler(w http.ResponseWriter, r *http.Request) {
-	postID := r.FormValue("postID")
-	postTitle := r.FormValue("postTitle")
-	postText := r.FormValue("postText")
+	id := r.FormValue("id")
+	title := r.FormValue("title")
+	text := r.FormValue("text")
 
 	var post *modules.Post
-	if postID != "" {
-		post = posts[postID]
-		post.title = postTitle
-		post.content = postText
+	if id != "" {
+		post = posts[id]
+		post.title = title
+		post.content = text
 	} else {
-		post := modules.newPost(postID, postTitle, postText)
+		post := modules.newPost(id, title, text)
 		posts[post.id] = post
 	}
 

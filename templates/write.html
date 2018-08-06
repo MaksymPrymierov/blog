@@ -8,10 +8,10 @@
   </div>
 	<div class="con-content-panel con-pl-3 position-relative">
     <form class="post-form con-post" role="form" action="/createPost" accept-charset="UTF-8" method="POST">
-      <input type="hidden" id="postID">
-      <input type="text" id="postTitle" class="form-control input-block input-contrast" name="postTitle" value aria-label="Title post" placeholder="Title post..." autocomplete="off">
+      <input type="hidden" id="id" name="id">
+      <input type="text" id="title" class="form-control input-block input-contrast" name="title" value aria-label="Title post" placeholder="Title post..." autocomplete="off">
       <div class="post-elements">
-        <textarea id="postText" class="form-control file-editor-textarea" rows="17" name="postText" data-codemirror-mode data-allow-unchanged="true" placeholder="Write text here" aria-label="Write text here"></textarea>
+        <textarea id="text" class="form-control file-editor-textarea" rows="17" name="text" data-codemirror-mode data-allow-unchanged="true" placeholder="Write text here" aria-label="Write text here"></textarea>
       </div>
       <div class="post-elements post-end">
         <button type="submit" class="btn float-left">Create Post</button>

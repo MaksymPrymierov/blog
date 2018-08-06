@@ -1,11 +1,11 @@
 package modules
 
 type Post struct {
-	id    string
-	title string
-	text  string
+	Id    string
+	Title string
+	Text  string
 }
 
-func newPost(id, title, text string) *Post {
-	return &Post{id, title, text}
+func newPost(Id, Title, Text string) *Post {
+	return &Post{Id, Title, Text}
 }
