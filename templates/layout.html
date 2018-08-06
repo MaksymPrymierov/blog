@@ -1,11 +1,9 @@
-{{ define "header" }}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
  <meta charset="UTF-8">
  <title>CONOSW</title>
- <link href="assets/css/style.css" rel="stylesheet">
+ <link href="/assets/css/style.css" rel="stylesheet">
 </head>
 <body>
   <div class="position-relative js-header-wrapper">
@@ -27,4 +25,22 @@
     </header>
   </div>
 
-{{ end }}
+  {{ yield }}
+
+ <div class="footer container-lg px-3 con-pt-1 con-pl-4" role="contentinfo">
+    <div class="footer position-relative d-flex flex-justify-between text-gray con-bt-1">
+      <ul class="list-style-none d-flex flex-wrap con-mt-6 con-ml-3 f6">
+        <li class="mr-3">
+          <span>© 2018 Connor41</span> 
+        </li>
+        <li class="mr-3">
+          <a href="https://github.com/connor41/blog">GitHub</a> 
+        </li>
+        <li class="mr-3">
+          <a href="https://gitlab.com/connor41/blog">GitLab</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

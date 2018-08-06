@@ -3,7 +3,8 @@ package main
 import (
 	"./modules"
 	"fmt"
-	"html/template"
+	"github.com/go-martini/martini"
+	"github.com/martini-contrib/render"
 	"net/http"
 	"strconv"
 )
@@ -11,26 +12,15 @@ import (
 var posts map[string]*modules.Post
 var postsID int
 
-func indexHadler(w http.ResponseWriter, r *http.Request) {
-	t, err := template.ParseFiles("templates/index.html", "templates/header.html", "templates/footer.html")
-	if err != nil {
-		fmt.Fprintf(w, err.Error())
-		return
-	}
-	t.ExecuteTemplate(w, "index", posts)
+func indexHandler(rnd render.Render) {
+	rnd.HTML(200, "index", posts)
 }
 
-func writeHadler(w http.ResponseWriter, r *http.Request) {
-	t, err := template.ParseFiles("templates/write.html", "templates/header.html", "templates/footer.html")
-	if err != nil {
-		fmt.Fprintf(w, err.Error())
-		return
-	}
-
-	t.ExecuteTemplate(w, "write", nil)
+func writeHandler(rnd render.Render) {
+	rnd.HTML(200, "write", nil)
 }
 
-func createPostHadler(w http.ResponseWriter, r *http.Request) {
+func createPostHandler(rnd render.Render, r *http.Request) {
 	id := r.FormValue("id")
 	title := r.FormValue("title")
 	text := r.FormValue("text")
@@ -47,68 +37,67 @@ func createPostHadler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	postsID = postsID + 1
-	http.Redirect(w, r, "/", 302)
+	rnd.Redirect("/")
 }
 
-func editPostHadler(w http.ResponseWriter, r *http.Request) {
-	t, err := template.ParseFiles("templates/write.html", "templates/header.html", "templates/footer.html")
-	if err != nil {
-		fmt.Fprintf(w, err.Error())
-		return
-	}
-
-	id := r.FormValue("id")
+func editPostHandler(rnd render.Render, params martini.Params) {
+	id := params["id"]
 	post, found := posts[id]
 	if !found {
-		http.NotFound(w, r)
+		rnd.Redirect("/")
 		return
 	}
 
-	t.ExecuteTemplate(w, "write", post)
+	rnd.HTML(200, "write", post)
 }
 
-func readPostHadler(w http.ResponseWriter, r *http.Request) {
-	t, err := template.ParseFiles("templates/read.html", "templates/header.html", "templates/footer.html")
-	if err != nil {
-		fmt.Fprintf(w, err.Error())
-		return
-	}
-
-	id := r.FormValue("id")
+func readPostHandler(rnd render.Render, params martini.Params) {
+	id := params["id"]
 	post, found := posts[id]
 	if !found {
-		http.NotFound(w, r)
+		rnd.Redirect("/")
 		return
 	}
 
-	t.ExecuteTemplate(w, "read", post)
+	rnd.HTML(200, "read", post)
 }
 
-func deletePostHadler(w http.ResponseWriter, r *http.Request) {
-	id := r.FormValue("id")
+func deletePostHandler(rnd render.Render, params martini.Params) {
+	id := params["id"]
 	if id == "" {
-		http.NotFound(w, r)
+		rnd.Redirect("/")
 		return
 	}
 
 	delete(posts, id)
 
-	http.Redirect(w, r, "/", 302)
+	rnd.Redirect("/")
 }
 
 func main() {
-	fmt.Println("Listening on port :3000")
-
 	posts = make(map[string]*modules.Post, 0)
 	postsID = 1
 
-	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("./assets/"))))
-	http.HandleFunc("/", indexHadler)
-	http.HandleFunc("/write", writeHadler)
-	http.HandleFunc("/createPost", createPostHadler)
-	http.HandleFunc("/editPost", editPostHadler)
-	http.HandleFunc("/readPost", readPostHadler)
-	http.HandleFunc("/deletePost", deletePostHadler)
+	m := martini.Classic()
 
-	http.ListenAndServe(":3000", nil)
+	m.Use(render.Renderer(render.Options{
+		Directory:  "templates",                // Specify what path to load the templates from.
+		Layout:     "layout",                   // Specify a layout template. Layouts can call {{ yield }} to render the current template.
+		Extensions: []string{".tmpl", ".html"}, // Specify extensions to load for templates.
+		//	Funcs:           []template.FuncMap{AppHelpers}, // Specify helper function maps for templates to access.
+		Charset:    "UTF-8", // Sets encoding for json and html content-types. Default is "UTF-8".
+		IndentJSON: true,    // Output human readable JSON
+	}))
+
+	staticOpt := martini.StaticOptions{Prefix: "assets"}
+	m.Use(martini.Static("assets", staticOpt))
+
+	m.Get("/", indexHandler)
+	m.Get("/write", writeHandler)
+	m.Post("/createPost", createPostHandler)
+	m.Get("/editPost/:id", editPostHandler)
+	m.Get("/readPost/:id", readPostHandler)
+	m.Get("/deletePost/:id", deletePostHandler)
+
+	m.Run()
 }
