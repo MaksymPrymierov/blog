@@ -340,6 +340,8 @@ button, html [type="button"], [type="reset"], [type="submit"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  margin-left: 5px;
+  margin: 10px;
 }
 
 .btn {

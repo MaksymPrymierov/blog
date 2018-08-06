@@ -84,6 +84,18 @@ func readPostHadler(w http.ResponseWriter, r *http.Request) {
 	t.ExecuteTemplate(w, "read", post)
 }
 
+func deletePostHadler(w http.ResponseWriter, r *http.Request) {
+	id := r.FormValue("id")
+	if id == "" {
+		http.NotFound(w, r)
+		return
+	}
+
+	delete(posts, id)
+
+	http.Redirect(w, r, "/", 302)
+}
+
 func main() {
 	fmt.Println("Listening on port :3000")
 
@@ -96,6 +108,7 @@ func main() {
 	http.HandleFunc("/createPost", createPostHadler)
 	http.HandleFunc("/editPost", editPostHadler)
 	http.HandleFunc("/readPost", readPostHadler)
+	http.HandleFunc("/deletePost", deletePostHadler)
 
 	http.ListenAndServe(":3000", nil)
 }
