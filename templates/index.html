@@ -2,17 +2,18 @@
 
 {{ template "header" }}
 
-{{ $value := . }}
+{{ range $key, $value := . }}
 
 <div class="index flex-justify-between px-3 container-lg con-px-i">
   <div class="con-info-index-panel con-pl-3 con-bb-2 position-relative">
     <h2>Main Page</h2>
   </div>
 	<div class="con-content-panel con-pl-3 position-relative">
-    <h1>{{ $value }}</h1>
-    <p>{{ $value }}</p>
+    <h1>{{ $value.Title }}</h1>
+    <p>{{ $value.Text }}</p>
 	</div>
 </div>
+{{ end }}
 
 {{ template "footer" }}
 {{ end }}

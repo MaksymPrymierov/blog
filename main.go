@@ -1,8 +1,8 @@
 package main
 
 import (
+	"./modules"
 	"fmt"
-	"github.com/connor41/blog/modules"
 	"html/template"
 	"net/http"
 )
@@ -34,11 +34,11 @@ func createPostHadler(w http.ResponseWriter, r *http.Request) {
 	var post *modules.Post
 	if id != "" {
 		post = posts[id]
-		post.title = title
-		post.content = text
+		post.Title = title
+		post.Text = text
 	} else {
-		post := modules.newPost(id, title, text)
-		posts[post.id] = post
+		post := modules.NewPost(id, title, text)
+		posts[post.Id] = post
 	}
 
 	http.Redirect(w, r, "/", 302)
