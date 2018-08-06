@@ -246,10 +246,11 @@ button, html [type="button"], [type="reset"], [type="submit"] {
 
 .file-editor-textarea {
   width: 100%;
+  min-height: 300px;
   padding: 5px 4px;
   font: 12px "SFMono-Regular",Consolas,"Liberation Mono",Menlo,Courier,monospace;
   resize: vertical;
-  border: 0;
+  border: 1;
   border-radius: 0;
   outline: none;
 }

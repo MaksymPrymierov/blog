@@ -4,6 +4,7 @@ import (
 	"html/template"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
@@ -33,6 +34,8 @@ func createPostHandler(rnd render.Render, r *http.Request) {
 	title := r.FormValue("title")
 	contentMarkdown := r.FormValue("contentMarkdown")
 	contentMarkdown = p.Sanitize(contentMarkdown)
+	contentMarkdown = strings.Replace(contentMarkdown, "\n", "<br>", -1)
+
 	contentHTML := blackfriday.Run([]byte(contentMarkdown))
 
 	var post *modules.Post
