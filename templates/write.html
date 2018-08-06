@@ -7,13 +7,14 @@
     <h2>Write New Post</h2>
   </div>
 	<div class="con-content-panel con-pl-3 position-relative">
-    <form class="post-form con-post" id="new-post" action="/" accept-charset="UTF-8" method="post">
-      <input type="text" class="form-control input-block input-contrast" name="Title post" value aria-label="Title post" placeholder="Title post..." autocomplete="off">
+    <form class="post-form con-post" role="form" action="/createPost" accept-charset="UTF-8" method="POST">
+      <input type="hidden" id="postID">
+      <input type="text" id="postTitle" class="form-control input-block input-contrast" name="postTitle" value aria-label="Title post" placeholder="Title post..." autocomplete="off">
       <div class="post-elements">
-        <textarea id="post_contents" class="form-control file-editor-textarea" rows="17" name="Content post" data-codemirror-mode data-allow-unchanged="true" placeholder="Write text here" aria-label="Write text here"></textarea>
+        <textarea id="postText" class="form-control file-editor-textarea" rows="17" name="postText" data-codemirror-mode data-allow-unchanged="true" placeholder="Write text here" aria-label="Write text here"></textarea>
       </div>
       <div class="post-elements post-end">
-        <button type="button" class="btn float-left">Create Post</button>
+        <button type="submit" class="btn float-left">Create Post</button>
       </div>
     <form>
 	</div>
