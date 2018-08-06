@@ -1,25 +1,20 @@
-{{ define "index" }}
+{{ define "read" }}
 
 {{ template "header" }}
 
+
 <div class="index flex-justify-between px-3 container-lg con-px-i">
   <div class="con-info-index-panel con-pl-3 con-bb-2 position-relative">
-    <h1>Main Page</h1>
+    <h1>{{.Title}}</h1>
   </div>
-{{ range $key, $value := . }}
-	<div class="con-content-panel con-pl-3 position-relative">
-    <div class="con-post-block con-pl-3">
-      <div class="post-all-content">
-        <a href="/readPost?id={{.Id}}" class="post-link postTitle">{{ $value.Title }}</a>
+  <div class="con-content-panel con-pl-3 position-relative">
+    <p>{{.Text}}</p>
         <div class="botton-block">
           <a href="/editPost?id={{.Id}}"><button type="botton" class="btn botton-box">Edit Post</button></a>
         </div>
-      </div>
-    </div>
-	</div>
-{{ end }}
+  </div>
 </div>
 
 {{ template "footer" }}
-{{ end }}
 
+{{ end }}

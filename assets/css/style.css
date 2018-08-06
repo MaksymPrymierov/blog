@@ -200,6 +200,13 @@ button, html [type="button"], [type="reset"], [type="submit"] {
 	min-width: 1028px;
 }
 
+.con-post-block {
+  border: 1px solid #d1d5da;
+  border-radius: 5px;
+  margin-top: 5px;
+  min-height: 60px;
+}
+
 .f6 {
   font-size: 12px !important;
 }
@@ -339,4 +346,37 @@ button, html [type="button"], [type="reset"], [type="submit"] {
   color: #24292e;
   background-color: #eff3f6;
   background-image: linear-gradient(-180deg, #fafbfc 0%, #eff3f6 90%);
+}
+
+.postTitle {
+  color: #24292e;
+}
+
+.postTitle:hover {
+  color: #0366d6;
+}
+
+.botton-block {
+  display: inline-block !important;
+  float: right !important;
+  margin-left: 8px !important;
+  margin-bottom: 8px !important;
+  margin-right: 2%;
+}
+
+.botton-box {
+  padding: 3px 10px;
+}
+
+.post-link {
+  word-break: break-all !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  line-height: 1.25 !important;
+  font-size: 16px !important;
+}
+
+.post-all-content {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
