@@ -10,6 +10,7 @@ import (
 	"github.com/martini-contrib/render"
 	"github.com/microcosm-cc/bluemonday"
 	"gopkg.in/russross/blackfriday.v2"
+	_ "labix.org/v2/mgo"
 
 	"./modules"
 )
@@ -61,6 +62,7 @@ func editPostHandler(rnd render.Render, params martini.Params) {
 		rnd.Redirect("/")
 		return
 	}
+	post.ContentMarkdown = strings.Replace(post.ContentMarkdown, "<br>", "\n", -1)
 
 	rnd.HTML(200, "write", post)
 }
