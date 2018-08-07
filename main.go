@@ -1,9 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
-	"strconv"
 	"strings"
 
 	"github.com/go-martini/martini"
@@ -17,7 +17,6 @@ import (
 )
 
 var postsCollection *mgo.Collection
-var postsID int
 
 func indexHandler(rnd render.Render) {
 	postDocuments := []documents.PostDocument{}
@@ -33,7 +32,8 @@ func indexHandler(rnd render.Render) {
 }
 
 func writeHandler(rnd render.Render) {
-	rnd.HTML(200, "write", nil)
+	post := modules.Post{}
+	rnd.HTML(200, "write", post)
 }
 
 func createPostHandler(rnd render.Render, r *http.Request) {
@@ -51,14 +51,15 @@ func createPostHandler(rnd render.Render, r *http.Request) {
 
 	postDocument := documents.PostDocument{id, title, string(contentHTML), contentMarkdown}
 	if id != "" {
+		fmt.Println("old post")
 		postsCollection.UpdateId(id, postDocument)
 	} else {
-		id = strconv.Itoa(postsID)
+		fmt.Println("new post")
+		id = GenerateId()
 		postDocument.Id = id
 		postsCollection.Insert(postDocument)
 	}
 
-	postsID = postsID + 1
 	rnd.Redirect("/")
 }
 
@@ -116,7 +117,6 @@ func main() {
 	}
 
 	postsCollection = session.DB("blog").C("posts")
-	postsID = 1
 
 	m := martini.Classic()
 

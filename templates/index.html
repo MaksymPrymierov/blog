@@ -2,14 +2,14 @@
   <div class="con-info-index-panel con-pl-3 con-bb-2 position-relative">
     <h1>Main Page</h1>
   </div>
-{{ range $key, $value := . }}
+{{ range $value := . }}
 	<div class="con-content-panel con-pl-3 position-relative">
     <div class="con-post-block con-pl-3">
       <div class="post-all-content">
-        <a href="/readPost/{{.Id}}" class="post-link postTitle">{{ $value.Title }}</a>
+        <a href="/readPost/{{ $value.Id }}" class="post-link postTitle">{{ $value.Title }}</a>
         <div class="botton-block">
-          <a href="/editPost/{{.Id}}"><button type="botton" class="btn botton-box">Edit Post</button></a>
-          <a href="/deletePost/{{.Id}}"><button type="botton" class="btn botton-box">Delete Post</button></a>
+          <a href="/editPost/{{ $value.Id }}"><button type="botton" class="btn botton-box">Edit Post</button></a>
+          <a href="/deletePost/{{ $value.Id }}"><button type="botton" class="btn botton-box">Delete Post</button></a>
         </div>
       </div>
     </div>

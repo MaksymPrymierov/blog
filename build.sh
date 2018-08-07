@@ -1,5 +1,5 @@
 #!/bin/bash
-go build main.go
+go build
 if (( $? != 0 ))
 then
   echo "Сборка завершилась с ошибкой"
@@ -10,5 +10,5 @@ fi
 if [[ $1 == "-s" ]]
 then
   echo "Запуск сервера..."
-  ./main
+  ./blog
 fi
