@@ -1,7 +1,11 @@
 package session
 
-type Session struct {
-	username string
+import (
+	"../utils"
+)
+
+type sessionData struct {
+	Username string
 }
 
 type Session struct {
@@ -14,4 +18,23 @@ func NewSession() *Session {
 	s.data = make(map[string]*sessionData)
 
 	return s
+}
+
+func (s *Session) Init(username string) string {
+	sessionId := utils.GenerateId()
+
+	data := &sessionData{Username: username}
+	s.data[sessionId] = data
+
+	return sessionId
+}
+
+func (s *Session) Get(sessionId string) string {
+	data := s.data[sessionId]
+
+	if data == nil {
+		return ""
+	}
+
+	return data.Username
 }

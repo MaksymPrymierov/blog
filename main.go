@@ -15,11 +15,23 @@ import (
 
 	"./db/documents"
 	"./modules"
+	"./session"
+	"./utils"
 )
 
 var postsCollection *mgo.Collection
+var inMemorySession *session.Session
 
-func indexHandler(rnd render.Render) {
+const (
+	COOKIE_NAME = "sessionId"
+)
+
+func indexHandler(rnd render.Render, r *http.Request) {
+	cookie, _ := r.Cookie(COOKIE_NAME)
+	if cookie != nil {
+		fmt.Println(inMemorySession.Get(cookie.Value))
+	}
+
 	postDocuments := []documents.PostDocument{}
 	postsCollection.Find(nil).All(&postDocuments)
 
@@ -61,7 +73,7 @@ func createPostHandler(rnd render.Render, r *http.Request) {
 		postsCollection.UpdateId(id, postDocument)
 	} else {
 		fmt.Println("new post")
-		id = GenerateNameId(title)
+		id = utils.GenerateNameId(title)
 		postDocument.Id = id
 		err := postsCollection.Insert(postDocument)
 		for err != nil {
@@ -121,12 +133,22 @@ func getLoginHandler(rnd render.Render) {
 	rnd.HTML(200, "login", nil)
 }
 
-func postLoginHandler(rnd render.Render, r *http.Request) {
+func postLoginHandler(rnd render.Render, r *http.Request, w http.ResponseWriter) {
 	username := r.FormValue("username")
 	password := r.FormValue("password")
 
 	fmt.Println(username)
 	fmt.Println(password)
+
+	sessionId := inMemorySession.Init(username)
+
+	cookie := &http.Cookie{
+		Name:    COOKIE_NAME,
+		Value:   sessionId,
+		Expires: time.Now().Add(5 * time.Minute),
+	}
+
+	http.SetCookie(w, cookie)
 
 	rnd.Redirect("/")
 }
@@ -136,6 +158,8 @@ func unescape(x string) interface{} {
 }
 
 func main() {
+	inMemorySession = session.NewSession()
+
 	session, err := mgo.Dial("localhost")
 	if err != nil {
 		panic(err)
