@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"net/http"
 	"strings"
+	"time"
 
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
@@ -37,6 +38,11 @@ func writeHandler(rnd render.Render) {
 }
 
 func createPostHandler(rnd render.Render, r *http.Request) {
+	code := r.FormValue("code")
+	if code != "дерпароль" {
+		rnd.Redirect("/")
+		return
+	}
 	p := bluemonday.NewPolicy()
 	p.AllowStandardURLs()
 	p.AllowElements("br")
@@ -45,9 +51,9 @@ func createPostHandler(rnd render.Render, r *http.Request) {
 	title := r.FormValue("title")
 	contentMarkdown := r.FormValue("contentMarkdown")
 	contentMarkdown = p.Sanitize(contentMarkdown)
-	contentMarkdown = strings.Replace(contentMarkdown, "\n", "<br>", -1)
 
 	contentHTML := blackfriday.Run([]byte(contentMarkdown))
+	contentHTML = []byte(strings.Replace(string(contentHTML), "\n", " <br> ", -1))
 
 	postDocument := documents.PostDocument{id, title, string(contentHTML), contentMarkdown}
 	if id != "" {
@@ -106,6 +112,20 @@ func deletePostHandler(rnd render.Render, params martini.Params) {
 	rnd.Redirect("/")
 }
 
+func getLoginHandler(rnd render.Render) {
+	rnd.HTML(200, "login", nil)
+}
+
+func postLoginHandler(rnd render.Render, r *http.Request) {
+	username := r.FormValue("username")
+	password := r.FormValue("password")
+
+	fmt.Println(username)
+	fmt.Println(password)
+
+	rnd.Redirect("/")
+}
+
 func unescape(x string) interface{} {
 	return template.HTML(x)
 }
@@ -115,6 +135,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	fmt.Println(time.Now())
 
 	postsCollection = session.DB("blog").C("posts")
 
@@ -140,6 +162,8 @@ func main() {
 	m.Get("/editPost/:id", editPostHandler)
 	m.Get("/readPost/:id", readPostHandler)
 	m.Get("/deletePost/:id", deletePostHandler)
+	m.Get("/login", getLoginHandler)
+	m.Post("/login", postLoginHandler)
 
 	m.Run()
 }

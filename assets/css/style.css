@@ -383,3 +383,11 @@ button, html [type="button"], [type="reset"], [type="submit"] {
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
+.pass-block {
+  padding-top: 10px;
+}
+
+.user-data {
+  width: 40%;
+}
