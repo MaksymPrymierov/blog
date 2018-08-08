@@ -40,5 +40,6 @@ func main() {
 	m.Get("/login", routes.GetLoginHandler)
 	m.Post("/login", routes.PostLoginHandler)
 
+	m.RunOnAddr(":80")
 	m.Run()
 }

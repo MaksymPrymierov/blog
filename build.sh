@@ -12,3 +12,10 @@ then
   echo "Запуск сервера..."
   ./blog
 fi
+if [[ $1 == "--80" ]]
+then
+  echo "Запуск сервера от имени суперпользователя"
+  sudo export PORT=80
+  sudo export GOPATH=/home/connor41/go
+  ./blog
+fi
