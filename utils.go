@@ -15,6 +15,20 @@ func GenerateId() string {
 
 func GenerateNameId(s string) string {
 	s = strings.ToLower(s)
+	s = strings.Replace(s, "/", "", -1)
+	s = strings.Replace(s, "\\", "", -1)
+	s = strings.Replace(s, "[", "", -1)
+	s = strings.Replace(s, "]", "", -1)
+	s = strings.Replace(s, ":", "", -1)
+	s = strings.Replace(s, ";", "", -1)
+	s = strings.Replace(s, "|", "", -1)
+	s = strings.Replace(s, "=", "", -1)
+	s = strings.Replace(s, ",", "", -1)
+	s = strings.Replace(s, "+", "", -1)
+	s = strings.Replace(s, "*", "", -1)
+	s = strings.Replace(s, "?", "", -1)
+	s = strings.Replace(s, "<", "", -1)
+	s = strings.Replace(s, ">", "", -1)
 	s = strings.Replace(s, " ", "-", -1)
 	return s
 }
