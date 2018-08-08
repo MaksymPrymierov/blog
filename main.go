@@ -61,9 +61,14 @@ func createPostHandler(rnd render.Render, r *http.Request) {
 		postsCollection.UpdateId(id, postDocument)
 	} else {
 		fmt.Println("new post")
-		id = GenerateId()
+		id = GenerateNameId(title)
 		postDocument.Id = id
-		postsCollection.Insert(postDocument)
+		err := postsCollection.Insert(postDocument)
+		for err != nil {
+			id = id + "c"
+			postDocument.Id = id
+			err = postsCollection.Insert(postDocument)
+		}
 	}
 
 	rnd.Redirect("/")

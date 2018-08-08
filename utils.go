@@ -3,6 +3,7 @@ package main
 import (
 	"crypto/rand"
 	"fmt"
+	"strings"
 )
 
 func GenerateId() string {
@@ -10,4 +11,10 @@ func GenerateId() string {
 	rand.Read(b)
 	fmt.Printf(string(b))
 	return fmt.Sprintf("%x", b)
+}
+
+func GenerateNameId(s string) string {
+	s = strings.ToLower(s)
+	s = strings.Replace(s, " ", "-", -1)
+	return s
 }
