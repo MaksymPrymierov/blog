@@ -11,12 +11,12 @@ import (
 	"gopkg.in/russross/blackfriday.v2"
 
 	"../db/documents"
-	"../modules"
+	"../models"
 	"../utils"
 )
 
 func WriteHandler(rnd render.Render) {
-	post := modules.Post{}
+	post := models.Post{}
 	rnd.HTML(200, "write", post)
 }
 
@@ -66,7 +66,7 @@ func EditPostHandler(rnd render.Render, params martini.Params) {
 		rnd.Redirect("/")
 		return
 	}
-	post := modules.Post{postDocument.Id, postDocument.Title, postDocument.ContentHtml, postDocument.ContentMarkdown}
+	post := models.Post{postDocument.Id, postDocument.Title, postDocument.ContentHtml, postDocument.ContentMarkdown}
 
 	post.ContentMarkdown = strings.Replace(post.ContentMarkdown, "<br>", "\n", -1)
 
@@ -83,7 +83,7 @@ func ReadPostHandler(rnd render.Render, params martini.Params) {
 		return
 	}
 
-	post := modules.Post{postDocument.Id, postDocument.Title, postDocument.ContentHtml, postDocument.ContentMarkdown}
+	post := models.Post{postDocument.Id, postDocument.Title, postDocument.ContentHtml, postDocument.ContentMarkdown}
 
 	rnd.HTML(200, "read", post)
 }

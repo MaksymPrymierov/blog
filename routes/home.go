@@ -8,7 +8,7 @@ import (
 	"labix.org/v2/mgo"
 
 	"../db/documents"
-	"../modules"
+	"../models"
 	"../session"
 )
 
@@ -39,9 +39,9 @@ func IndexHandler(rnd render.Render, r *http.Request) {
 	postDocuments := []documents.PostDocument{}
 	postsCollection.Find(nil).All(&postDocuments)
 
-	posts := []modules.Post{}
+	posts := []models.Post{}
 	for _, doc := range postDocuments {
-		post := modules.Post{doc.Id, doc.Title, doc.ContentHtml, doc.ContentMarkdown}
+		post := models.Post{doc.Id, doc.Title, doc.ContentHtml, doc.ContentMarkdown}
 		posts = append(posts, post)
 	}
 
