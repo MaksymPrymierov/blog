@@ -6,6 +6,9 @@ import (
 	"time"
 
 	"github.com/martini-contrib/render"
+
+	"../db/users"
+	"../utils"
 )
 
 func GetLoginHandler(rnd render.Render) {
@@ -14,10 +17,24 @@ func GetLoginHandler(rnd render.Render) {
 
 func PostLoginHandler(rnd render.Render, r *http.Request, w http.ResponseWriter) {
 	username := r.FormValue("username")
-	password := r.FormValue("password")
+	id := utils.GenerateNameId(username)
 
-	fmt.Println(username)
-	fmt.Println(password)
+	thisUser := users.UsersTable{}
+	err := usersTables.FindId(id).One(&thisUser)
+	if err != nil {
+		fmt.Println("Нет такого юзера))")
+		rnd.Redirect("/")
+		return
+	}
+
+	password := r.FormValue("password")
+	pass := thisUser.Password
+
+	if pass != password {
+		fmt.Println("Пароль не верный, иди нахуй")
+		rnd.Redirect("/")
+		return
+	}
 
 	sessionId := inMemorySession.Init(username)
 

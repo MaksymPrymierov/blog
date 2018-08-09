@@ -13,6 +13,7 @@ import (
 )
 
 var postsCollection *mgo.Collection
+var usersTables *mgo.Collection
 var inMemorySession *session.Session
 
 const (
@@ -28,6 +29,7 @@ func Init() {
 	}
 
 	postsCollection = session.DB("blog").C("posts")
+	usersTables = session.DB("blog").C("users")
 }
 
 func IndexHandler(rnd render.Render, r *http.Request) {

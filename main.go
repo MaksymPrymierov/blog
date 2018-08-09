@@ -39,6 +39,8 @@ func main() {
 	m.Get("/deletePost/:id", routes.DeletePostHandler)
 	m.Get("/login", routes.GetLoginHandler)
 	m.Post("/login", routes.PostLoginHandler)
+	m.Get("/register", routes.GetRegisterHandler)
+	m.Post("/register", routes.PostRegisterHandler)
 
 	m.RunOnAddr(":80")
 	m.Run()
