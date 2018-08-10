@@ -53,5 +53,13 @@
           <a href="/deletePost/{{$data.DataPosts.Id}}"><button type="botton" class="btn botton-box">Delete Post</button></a>
           {{ end }}
         </div>
+      <ul class="list-style-none flex-wrap con-ml-3 f6 date">
+        <li class="mr-3">
+          <span class="text-gray">Date: {{$data.DataPosts.Time.Year}} {{$data.DataPosts.Time.Month}} {{$data.DataPosts.Time.Day}}</span> 
+        </li>
+        <li class="mr-3">
+          <span class="text-gray">Time: {{$data.DataPosts.Time.Hour}}:{{$data.DataPosts.Time.Min}}:{{$data.DataPosts.Time.Sec}}</span>
+        </li>
+      </ul>
   </div>
 </div>

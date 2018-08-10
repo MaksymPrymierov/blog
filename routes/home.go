@@ -50,7 +50,7 @@ func IndexHandler(rnd render.Render, r *http.Request) {
 
 	posts := []models.Post{}
 	for _, doc := range postDocuments {
-		post := models.Post{doc.Id, doc.Title, doc.ContentHtml, doc.ContentMarkdown}
+		post := models.Post{doc.Id, doc.Title, doc.ContentHtml, doc.ContentMarkdown, doc.Time}
 		posts = append(posts, post)
 	}
 

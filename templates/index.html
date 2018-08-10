@@ -56,6 +56,11 @@
           <a href="/deletePost/{{ $value.Id }}"><button type="botton" class="btn botton-box">Delete Post</button></a>
           {{ end }}
         </div>
+      <ul class="list-style-none flex-wrap con-ml-3 f6 date">
+        <li class="mr-3">
+          <span class="text-gray">{{$value.Time.Month}} {{$value.Time.Day}}</span> 
+        </li>
+      </ul>
       </div>
     </div>
 	</div>

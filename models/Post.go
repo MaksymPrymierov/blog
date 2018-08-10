@@ -5,8 +5,9 @@ type Post struct {
 	Title           string
 	ContentHTML     string
 	ContentMarkdown string
+	Time            CurrentTime
 }
 
-func NewPost(Id, Title, ContentHTML, ContentMarkdown string) *Post {
-	return &Post{Id, Title, ContentHTML, ContentMarkdown}
+func NewPost(Id, Title, ContentHTML, ContentMarkdown string, Time CurrentTime) *Post {
+	return &Post{Id, Title, ContentHTML, ContentMarkdown, Time}
 }

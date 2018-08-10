@@ -49,7 +49,9 @@ func CreatePostHandler(rnd render.Render, r *http.Request) {
 	contentHTML := blackfriday.Run([]byte(contentMarkdown))
 	contentHTML = []byte(strings.Replace(string(contentHTML), "\n", " <br> ", -1))
 
-	postDocument := documents.PostDocument{id, title, string(contentHTML), contentMarkdown}
+	currentTime := models.GetCurrentTime()
+
+	postDocument := documents.PostDocument{id, title, string(contentHTML), contentMarkdown, currentTime}
 	if id != "" {
 		fmt.Println("old post")
 		postsCollection.UpdateId(id, postDocument)
@@ -83,7 +85,7 @@ func EditPostHandler(rnd render.Render, params martini.Params, r *http.Request) 
 		rnd.Redirect("/")
 		return
 	}
-	post := models.Post{postDocument.Id, postDocument.Title, postDocument.ContentHtml, postDocument.ContentMarkdown}
+	post := models.Post{postDocument.Id, postDocument.Title, postDocument.ContentHtml, postDocument.ContentMarkdown, postDocument.Time}
 
 	post.ContentMarkdown = strings.Replace(post.ContentMarkdown, "<br>", "\n", -1)
 
@@ -104,7 +106,7 @@ func ReadPostHandler(rnd render.Render, params martini.Params, r *http.Request) 
 		return
 	}
 
-	post := models.Post{postDocument.Id, postDocument.Title, postDocument.ContentHtml, postDocument.ContentMarkdown}
+	post := models.Post{postDocument.Id, postDocument.Title, postDocument.ContentHtml, postDocument.ContentMarkdown, postDocument.Time}
 
 	date := data.PostsData{post, username}
 

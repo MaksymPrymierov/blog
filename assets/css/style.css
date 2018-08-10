@@ -369,6 +369,7 @@ button, html [type="button"], [type="reset"], [type="submit"] {
 
 .botton-box {
   padding: 3px 10px;
+  margin: 0px;
 }
 
 .post-link {
@@ -390,4 +391,9 @@ button, html [type="button"], [type="reset"], [type="submit"] {
 
 .user-data {
   width: 40%;
+}
+
+.postTimeBlock {
+  display: inline-block !important;
+  min-width: 10px;
 }
