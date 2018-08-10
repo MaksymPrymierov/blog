@@ -10,4 +10,5 @@ type PostDocument struct {
 	ContentHtml     string
 	ContentMarkdown string
 	Time            models.CurrentTime
+	Owner           string
 }

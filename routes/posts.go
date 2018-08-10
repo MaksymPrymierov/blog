@@ -31,8 +31,8 @@ func WriteHandler(rnd render.Render, r *http.Request) {
 }
 
 func CreatePostHandler(rnd render.Render, r *http.Request) {
-	c := protect(r)
-	if c == "" {
+	username := protect(r)
+	if username == "" {
 		rnd.Redirect("/notPerm")
 		return
 	}
@@ -51,7 +51,14 @@ func CreatePostHandler(rnd render.Render, r *http.Request) {
 
 	currentTime := models.GetCurrentTime()
 
-	postDocument := documents.PostDocument{id, title, string(contentHTML), contentMarkdown, currentTime}
+	postDocument := documents.PostDocument{
+		id,
+		title,
+		string(contentHTML),
+		contentMarkdown,
+		currentTime,
+		username,
+	}
 	if id != "" {
 		fmt.Println("old post")
 		postsCollection.UpdateId(id, postDocument)
@@ -85,7 +92,14 @@ func EditPostHandler(rnd render.Render, params martini.Params, r *http.Request) 
 		rnd.Redirect("/")
 		return
 	}
-	post := models.Post{postDocument.Id, postDocument.Title, postDocument.ContentHtml, postDocument.ContentMarkdown, postDocument.Time}
+	post := models.Post{
+		postDocument.Id,
+		postDocument.Title,
+		postDocument.ContentHtml,
+		postDocument.ContentMarkdown,
+		postDocument.Time,
+		postDocument.Owner,
+	}
 
 	post.ContentMarkdown = strings.Replace(post.ContentMarkdown, "<br>", "\n", -1)
 
@@ -106,7 +120,14 @@ func ReadPostHandler(rnd render.Render, params martini.Params, r *http.Request) 
 		return
 	}
 
-	post := models.Post{postDocument.Id, postDocument.Title, postDocument.ContentHtml, postDocument.ContentMarkdown, postDocument.Time}
+	post := models.Post{
+		postDocument.Id,
+		postDocument.Title,
+		postDocument.ContentHtml,
+		postDocument.ContentMarkdown,
+		postDocument.Time,
+		postDocument.Owner,
+	}
 
 	date := data.PostsData{post, username}
 
