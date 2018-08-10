@@ -44,6 +44,9 @@ func main() {
 	m.Get("/notPerm", routes.NotPermHandler)
 	m.Get("/alreadyAuth", routes.AlreadyAuthHandler)
 	m.Get("/exit", routes.ExitSessionHandler)
+	m.Get("/errAuth", routes.ErrAuthHandler)
+	m.Get("/errLogin", routes.ErrRegLoginHandler)
+	m.Get("/errEmail", routes.ErrRegEmailHandler)
 
 	m.RunOnAddr(":80")
 	m.Run()

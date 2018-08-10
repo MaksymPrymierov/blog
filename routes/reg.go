@@ -33,10 +33,6 @@ func PostRegisterHandler(rnd render.Render, r *http.Request) {
 	password := r.FormValue("password")
 	perm := ""
 
-	fmt.Println(email)
-	fmt.Println(username)
-	fmt.Println(password)
-
 	userTable := users.UsersTable{id, email, username, password, perm}
 	fmt.Println("createuser")
 	id = utils.GenerateNameId(username)
@@ -45,7 +41,7 @@ func PostRegisterHandler(rnd render.Render, r *http.Request) {
 	userTable.Permission = perm
 	err := usersTables.Insert(userTable)
 	if err != nil {
-		fmt.Println("такой юзер есть")
+		rnd.Redirect("/errLogin")
 	}
 
 	rnd.Redirect("/")

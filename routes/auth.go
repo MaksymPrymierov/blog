@@ -1,7 +1,6 @@
 package routes
 
 import (
-	"fmt"
 	"net/http"
 	"time"
 
@@ -34,8 +33,7 @@ func PostLoginHandler(rnd render.Render, r *http.Request, w http.ResponseWriter)
 	thisUser := users.UsersTable{}
 	err := usersTables.FindId(id).One(&thisUser)
 	if err != nil {
-		fmt.Println("Нет такого юзера))")
-		rnd.Redirect("/")
+		rnd.Redirect("/errAuth")
 		return
 	}
 
@@ -43,8 +41,7 @@ func PostLoginHandler(rnd render.Render, r *http.Request, w http.ResponseWriter)
 	pass := thisUser.Password
 
 	if pass != password {
-		fmt.Println("Пароль не верный, иди нахуй")
-		rnd.Redirect("/")
+		rnd.Redirect("errAuth")
 		return
 	}
 

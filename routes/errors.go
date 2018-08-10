@@ -7,6 +7,9 @@ import (
 const (
 	notAuth     = "To access this page, you need to login."
 	alreadyAuth = "You are already authorized."
+	errAuth     = "Not a valid password or login."
+	errRegLogin = "This login is already taken."
+	errRegEmail = "This email is already taken."
 )
 
 func NotPermHandler(rnd render.Render) {
@@ -15,4 +18,16 @@ func NotPermHandler(rnd render.Render) {
 
 func AlreadyAuthHandler(rnd render.Render) {
 	rnd.HTML(200, "error", alreadyAuth)
+}
+
+func ErrAuthHandler(rnd render.Render) {
+	rnd.HTML(200, "error", errAuth)
+}
+
+func ErrRegLoginHandler(rnd render.Render) {
+	rnd.HTML(200, "error", errRegLogin)
+}
+
+func ErrRegEmailHandler(rnd render.Render) {
+	rnd.HTML(200, "error", errRegEmail)
 }
