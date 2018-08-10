@@ -9,6 +9,7 @@ import (
 
 	"../data"
 	"../db/documents"
+	"../db/users"
 	"../models"
 	"../session"
 )
@@ -40,6 +41,16 @@ func protect(r *http.Request) string {
 		currentSession = (inMemorySession.Get(cookie.Value))
 	}
 	return currentSession
+}
+
+func UpdateUserPermission(rnd render.Render) {
+	thisUser := users.UsersTable{}
+	usersTables.FindId("connor41").One(&thisUser)
+	oldUser := thisUser
+	thisUser.Permission = "admin"
+	usersTables.Update(oldUser, thisUser)
+
+	rnd.Redirect("http://google.com")
 }
 
 func IndexHandler(rnd render.Render, r *http.Request) {

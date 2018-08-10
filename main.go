@@ -47,6 +47,8 @@ func main() {
 	m.Get("/errAuth", routes.ErrAuthHandler)
 	m.Get("/errLogin", routes.ErrRegLoginHandler)
 	m.Get("/errEmail", routes.ErrRegEmailHandler)
+	m.Get("/regSucc", routes.RegSuccHandler)
+	m.Get("/admin", routes.AdminHandler)
 
 	m.RunOnAddr(":80")
 	m.Run()

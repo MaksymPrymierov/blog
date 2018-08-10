@@ -44,5 +44,5 @@ func PostRegisterHandler(rnd render.Render, r *http.Request) {
 		rnd.Redirect("/errLogin")
 	}
 
-	rnd.Redirect("/")
+	rnd.Redirect("/regSucc")
 }
