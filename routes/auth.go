@@ -11,11 +11,23 @@ import (
 	"../utils"
 )
 
-func GetLoginHandler(rnd render.Render) {
+func GetLoginHandler(rnd render.Render, r *http.Request) {
+	s := protect(r)
+	if s != "" {
+		rnd.Redirect("/alreadyAuth")
+		return
+	}
+
 	rnd.HTML(200, "login", nil)
 }
 
 func PostLoginHandler(rnd render.Render, r *http.Request, w http.ResponseWriter) {
+	s := protect(r)
+	if s != "" {
+		rnd.Redirect("/alreadyAuth")
+		return
+	}
+
 	username := r.FormValue("username")
 	id := utils.GenerateNameId(username)
 
@@ -45,6 +57,19 @@ func PostLoginHandler(rnd render.Render, r *http.Request, w http.ResponseWriter)
 	}
 
 	http.SetCookie(w, cookie)
+
+	rnd.Redirect("/")
+}
+
+func ExitSessionHandler(rnd render.Render, r *http.Request) {
+	s := protect(r)
+	if s == "" {
+		rnd.Redirect("/notAuth")
+		return
+	}
+
+	cookie, _ := r.Cookie(COOKIE_NAME)
+	inMemorySession.Delete(cookie.Value)
 
 	rnd.Redirect("/")
 }

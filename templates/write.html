@@ -1,4 +1,5 @@
-  <div class="position-relative js-header-wrapper">
+{{ $data := . }}
+<div class="position-relative js-header-wrapper">
     <header class="Header f5" role="banner">
       <div class="d-flex flex-justify-between px-3 container-lg con-px-1">
         <div class="HeaderMenu d-flex flex-justify-between flex-auto">
@@ -15,10 +16,7 @@
           <div class="d-flex">
             <ul class="d-flex pl-2 flex-items-center text-bold list-style-none">
 							<li>
-								<a class="js-selected-navigation-item HeaderNavlink px-2 con-link-1" href="/login">Log In</a>
-							</li>
-              <li>
-								<a class="js-selected-navigation-item HeaderNavlink px-2 con-link-1" href="/register">Register</a>
+                <a class="js-selected-navigation-item HeaderNavlink px-2 con-link-1" href="/">{{ $data.UserData }}</a>
 							</li>
 
             </ul>
@@ -34,12 +32,11 @@
   </div>
 	<div class="con-content-panel con-pl-3 position-relative">
     <form class="post-form con-post" role="form" action="/createPost" accept-charset="UTF-8" method="POST">
-      <input type="hidden" id="id" name="id" value="{{.Id}}">
-      <input type="text" id="title" class="form-control input-block input-contrast" maxlength="120" name="title" aria-label="Title post" placeholder="Title post..." autocomplete="off" value="{{.Title}}" required>
+      <input type="hidden" id="id" name="id" value="{{$data.DataPosts.Id}}">
+      <input type="text" id="title" class="form-control input-block input-contrast" maxlength="120" name="title" aria-label="Title post" placeholder="Title post..." autocomplete="off" value="{{$data.DataPosts.Title}}" required>
       <div class="post-elements">
-        <textarea id="contentMarkdown" class="file-editor-textarea" rows="17" name="contentMarkdown" placeholder="Write text here" aria-label="Write text here" wrap="soft | hard">{{.ContentMarkdown}}</textarea>
+        <textarea id="contentMarkdown" class="file-editor-textarea" rows="17" name="contentMarkdown" placeholder="Write text here" aria-label="Write text here" wrap="soft | hard">{{$data.DataPosts.ContentMarkdown}}</textarea>
       </div>
-      <input type="password" id="code" class="form-control input-block input-contrast" maxlength="120" name="code" aria-label="Code" placeholder="Submit code..." autocomplete="off" required>
       <div class="post-elements post-end">
         <button type="submit" class="btn float-left">Save Post</button>
       </div>

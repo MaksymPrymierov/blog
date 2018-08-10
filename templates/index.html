@@ -8,22 +8,30 @@
 							<li>
 								<a class="js-selected-navigation-item HeaderNavlink px-2 con-link-1" href="/">Main Page</a>
 							</li>
+              {{ if $data.UserData }}
 							<li>
 								<a class="js-selected-navigation-item HeaderNavlink px-2 con-link-1" href="/write">Write Post</a>
 							</li>
+              {{ end }}
             </ul>
           </div>
           <div class="d-flex">
             <ul class="d-flex pl-2 flex-items-center text-bold list-style-none">
+              {{ if $data.UserData }}
               <li>
                 <a class="js-selected-navigation-item HeaderNavlink px-2 con-link-1" href="/">{{ $data.UserData }}</a>
 							</li>
+              <li>
+                <a class="js-selected-navigation-item HeaderNavlink px-2 con-link-1" href="/exit">Log Out</a>
+							</li>
+              {{ else }}
 							<li>
 								<a class="js-selected-navigation-item HeaderNavlink px-2 con-link-1" href="/login">Log In</a>
 							</li>
               <li>
 								<a class="js-selected-navigation-item HeaderNavlink px-2 con-link-1" href="/register">Register</a>
 							</li>
+              {{ end }}
 
             </ul>
           </div>
@@ -43,8 +51,10 @@
       <div class="post-all-content">
         <a href="/readPost/{{ $value.Id }}" class="post-link postTitle">{{ $value.Title }}</a>
         <div class="botton-block">
+          {{ if $data.UserData }}
           <a href="/editPost/{{ $value.Id }}"><button type="botton" class="btn botton-box">Edit Post</button></a>
-          <a href="/ndeletePost/{{ $value.Id }}"><button type="botton" class="btn botton-box">Delete Post</button></a>
+          <a href="/deletePost/{{ $value.Id }}"><button type="botton" class="btn botton-box">Delete Post</button></a>
+          {{ end }}
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
-  <div class="position-relative js-header-wrapper">
+{{ $data := . }}  
+<div class="position-relative js-header-wrapper">
     <header class="Header f5" role="banner">
       <div class="d-flex flex-justify-between px-3 container-lg con-px-1">
         <div class="HeaderMenu d-flex flex-justify-between flex-auto">
@@ -7,19 +8,31 @@
 							<li>
 								<a class="js-selected-navigation-item HeaderNavlink px-2 con-link-1" href="/">Main Page</a>
 							</li>
+              {{ if $data.UserData }}
 							<li>
 								<a class="js-selected-navigation-item HeaderNavlink px-2 con-link-1" href="/write">Write Post</a>
 							</li>
+              {{ end }}
             </ul>
           </div>
           <div class="d-flex">
             <ul class="d-flex pl-2 flex-items-center text-bold list-style-none">
+							{{ if $data.UserData }}
+              <li>
+                <a class="js-selected-navigation-item HeaderNavlink px-2 con-link-1" href="/">{{ $data.UserData }}</a>
+							</li>
+              <li>
+                <a class="js-selected-navigation-item HeaderNavlink px-2 con-link-1" href="/exit">Log Out</a>
+							</li>
+              {{ else }}
 							<li>
 								<a class="js-selected-navigation-item HeaderNavlink px-2 con-link-1" href="/login">Log In</a>
 							</li>
               <li>
 								<a class="js-selected-navigation-item HeaderNavlink px-2 con-link-1" href="/register">Register</a>
 							</li>
+              {{ end }}
+
 
             </ul>
           </div>
@@ -30,13 +43,15 @@
   </div>
 <div class="index flex-justify-between px-3 container-lg con-px-i">
   <div class="con-info-index-panel con-pl-3 con-bb-2 position-relative">
-    <h1>{{.Title}}</h1>
+    <h1>{{ $data.DataPosts.Title}}</h1>
   </div>
   <div class="con-content-panel con-pl-3 position-relative">
-    {{.ContentHTML | unescape }}
+    {{$data.DataPosts.ContentHTML | unescape }}
         <div class="botton-block">
-          <a href="/editPost/{{.Id}}"><button type="botton" class="btn botton-box">Edit Post</button></a>
-          <a href="/ndeletePost/{{.Id}}"><button type="botton" class="btn botton-box">Delete Post</button></a>
+          {{ if $data.UserData }}
+          <a href="/editPost/{{$data.DataPosts.Id}}"><button type="botton" class="btn botton-box">Edit Post</button></a>
+          <a href="/deletePost/{{$data.DataPosts.Id}}"><button type="botton" class="btn botton-box">Delete Post</button></a>
+          {{ end }}
         </div>
   </div>
 </div>

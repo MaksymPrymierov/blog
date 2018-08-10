@@ -41,6 +41,9 @@ func main() {
 	m.Post("/login", routes.PostLoginHandler)
 	m.Get("/register", routes.GetRegisterHandler)
 	m.Post("/register", routes.PostRegisterHandler)
+	m.Get("/notPerm", routes.NotPermHandler)
+	m.Get("/alreadyAuth", routes.AlreadyAuthHandler)
+	m.Get("/exit", routes.ExitSessionHandler)
 
 	m.RunOnAddr(":80")
 	m.Run()

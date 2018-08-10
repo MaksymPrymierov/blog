@@ -33,12 +33,17 @@ func Init() {
 	usersTables = session.DB("blog").C("users")
 }
 
-func IndexHandler(rnd render.Render, r *http.Request) {
+func protect(r *http.Request) string {
 	cookie, _ := r.Cookie(COOKIE_NAME)
 	var currentSession string
 	if cookie != nil {
 		currentSession = (inMemorySession.Get(cookie.Value))
 	}
+	return currentSession
+}
+
+func IndexHandler(rnd render.Render, r *http.Request) {
+	currentSession := protect(r)
 
 	postDocuments := []documents.PostDocument{}
 	postsCollection.Find(nil).All(&postDocuments)

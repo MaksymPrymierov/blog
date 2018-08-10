@@ -10,22 +10,33 @@ import (
 	"github.com/microcosm-cc/bluemonday"
 	"gopkg.in/russross/blackfriday.v2"
 
+	"../data"
 	"../db/documents"
 	"../models"
 	"../utils"
 )
 
-func WriteHandler(rnd render.Render) {
+func WriteHandler(rnd render.Render, r *http.Request) {
+	username := protect(r)
+	if username == "" {
+		rnd.Redirect("/notPerm")
+		return
+	}
+
 	post := models.Post{}
-	rnd.HTML(200, "write", post)
+
+	date := data.PostsData{post, username}
+
+	rnd.HTML(200, "write", date)
 }
 
 func CreatePostHandler(rnd render.Render, r *http.Request) {
-	code := r.FormValue("code")
-	if code != "дерпароль" {
-		rnd.Redirect("/")
+	c := protect(r)
+	if c == "" {
+		rnd.Redirect("/notPerm")
 		return
 	}
+
 	p := bluemonday.NewPolicy()
 	p.AllowStandardURLs()
 	p.AllowElements("br")
@@ -57,7 +68,13 @@ func CreatePostHandler(rnd render.Render, r *http.Request) {
 	rnd.Redirect("/")
 }
 
-func EditPostHandler(rnd render.Render, params martini.Params) {
+func EditPostHandler(rnd render.Render, params martini.Params, r *http.Request) {
+	username := protect(r)
+	if username == "" {
+		rnd.Redirect("/notPerm")
+		return
+	}
+
 	id := params["id"]
 
 	postDocument := documents.PostDocument{}
@@ -70,10 +87,14 @@ func EditPostHandler(rnd render.Render, params martini.Params) {
 
 	post.ContentMarkdown = strings.Replace(post.ContentMarkdown, "<br>", "\n", -1)
 
-	rnd.HTML(200, "write", post)
+	date := data.PostsData{post, username}
+
+	rnd.HTML(200, "write", date)
 }
 
-func ReadPostHandler(rnd render.Render, params martini.Params) {
+func ReadPostHandler(rnd render.Render, params martini.Params, r *http.Request) {
+	username := protect(r)
+
 	id := params["id"]
 
 	postDocument := documents.PostDocument{}
@@ -85,10 +106,18 @@ func ReadPostHandler(rnd render.Render, params martini.Params) {
 
 	post := models.Post{postDocument.Id, postDocument.Title, postDocument.ContentHtml, postDocument.ContentMarkdown}
 
-	rnd.HTML(200, "read", post)
+	date := data.PostsData{post, username}
+
+	rnd.HTML(200, "read", date)
 }
 
-func DeletePostHandler(rnd render.Render, params martini.Params) {
+func DeletePostHandler(rnd render.Render, params martini.Params, r *http.Request) {
+	c := protect(r)
+	if c == "" {
+		rnd.Redirect("/notPerm")
+		return
+	}
+
 	id := params["id"]
 	if id == "" {
 		rnd.Redirect("/")
