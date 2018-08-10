@@ -53,7 +53,7 @@ func PostLoginHandler(rnd render.Render, r *http.Request, w http.ResponseWriter)
 	cookie := &http.Cookie{
 		Name:    COOKIE_NAME,
 		Value:   sessionId,
-		Expires: time.Now().Add(5 * time.Minute),
+		Expires: time.Now().Add(24 * time.Hour),
 	}
 
 	http.SetCookie(w, cookie)
