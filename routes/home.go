@@ -1,12 +1,13 @@
 package routes
 
 import (
-	"fmt"
+	_ "fmt"
 	"net/http"
 
 	"github.com/martini-contrib/render"
 	"labix.org/v2/mgo"
 
+	"../data"
 	"../db/documents"
 	"../models"
 	"../session"
@@ -34,8 +35,9 @@ func Init() {
 
 func IndexHandler(rnd render.Render, r *http.Request) {
 	cookie, _ := r.Cookie(COOKIE_NAME)
+	var currentSession string
 	if cookie != nil {
-		fmt.Println(inMemorySession.Get(cookie.Value))
+		currentSession = (inMemorySession.Get(cookie.Value))
 	}
 
 	postDocuments := []documents.PostDocument{}
@@ -47,5 +49,7 @@ func IndexHandler(rnd render.Render, r *http.Request) {
 		posts = append(posts, post)
 	}
 
-	rnd.HTML(200, "index", posts)
+	date := data.IndexData{posts, currentSession}
+
+	rnd.HTML(200, "index", date)
 }
