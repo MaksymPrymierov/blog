@@ -397,3 +397,22 @@ button, html [type="button"], [type="reset"], [type="submit"] {
   display: inline-block !important;
   min-width: 10px;
 }
+
+.admin-menu {
+  padding-left: 16px !important;
+  float: left !important;
+  width: 25%;
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
+}
+
+.admin-botton {
+  list-style: none;
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
+}
+
+.admin-btm {
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;}
+}
