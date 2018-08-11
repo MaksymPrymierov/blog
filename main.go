@@ -1,55 +1,43 @@
 package main
 
 import (
-	"html/template"
-
 	"github.com/go-martini/martini"
-	"github.com/martini-contrib/render"
 
 	"./routes"
 )
 
-func unescape(x string) interface{} {
-	return template.HTML(x)
-}
-
 func main() {
-	routes.Init()
-	m := martini.Classic()
+	m := routes.Init()
 
-	unescapeFuncMap := template.FuncMap{"unescape": unescape}
-
-	m.Use(render.Renderer(render.Options{
-		Directory:  "templates",                         // Specify what path to load the templates from.
-		Layout:     "layout",                            // Specify a layout template. Layouts can call {{ yield }} to render the current template.
-		Extensions: []string{".tmpl", ".html"},          // Specify extensions to load for templates.
-		Funcs:      []template.FuncMap{unescapeFuncMap}, // Specify helper function maps for templates to access.
-		Charset:    "UTF-8",                             // Sets encoding for json and html content-types. Default is "UTF-8".
-		IndentJSON: true,                                // Output human readable JSON
-	}))
-
+	/* Static file */
 	staticOpt := martini.StaticOptions{Prefix: "assets"}
 	m.Use(martini.Static("assets", staticOpt))
-
+	/* Home Routes */
 	m.Get("/", routes.IndexHandler)
+	/* Posts Routes */
 	m.Get("/write", routes.WriteHandler)
 	m.Post("/createPost", routes.CreatePostHandler)
 	m.Get("/editPost/:id", routes.EditPostHandler)
 	m.Get("/readPost/:id", routes.ReadPostHandler)
 	m.Get("/deletePost/:id", routes.DeletePostHandler)
+	/* Auth Routes */
 	m.Get("/login", routes.GetLoginHandler)
 	m.Post("/login", routes.PostLoginHandler)
+	m.Get("/exit", routes.ExitSessionHandler)
+	/* Reg Routes */
 	m.Get("/register", routes.GetRegisterHandler)
 	m.Post("/register", routes.PostRegisterHandler)
+	/* Error Routes */
 	m.Get("/notAuth", routes.NotAuthHandler)
 	m.Get("/alreadyAuth", routes.AlreadyAuthHandler)
-	m.Get("/exit", routes.ExitSessionHandler)
 	m.Get("/errAuth", routes.ErrAuthHandler)
 	m.Get("/errLogin", routes.ErrRegLoginHandler)
 	m.Get("/errEmail", routes.ErrRegEmailHandler)
-	m.Get("/regSucc", routes.RegSuccHandler)
-	m.Get("/admin", routes.AdminHandler)
 	m.Get("/notPerm", routes.NotPermHandler)
+	/* Message Routes */
+	m.Get("/regSucc", routes.RegSuccHandler)
+	/* Admin Panel Routes */
+	m.Get("/admin", routes.AdminHandler)
 
 	m.RunOnAddr(":80")
 	m.Run()
