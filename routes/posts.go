@@ -19,7 +19,7 @@ import (
 func WriteHandler(rnd render.Render, r *http.Request) {
 	username := protect(r)
 	if username == "" {
-		rnd.Redirect("/notPerm")
+		rnd.Redirect("/notAuth")
 		return
 	}
 
@@ -33,7 +33,7 @@ func WriteHandler(rnd render.Render, r *http.Request) {
 func CreatePostHandler(rnd render.Render, r *http.Request) {
 	username := protect(r)
 	if username == "" {
-		rnd.Redirect("/notPerm")
+		rnd.Redirect("/notAuth")
 		return
 	}
 
@@ -80,7 +80,7 @@ func CreatePostHandler(rnd render.Render, r *http.Request) {
 func EditPostHandler(rnd render.Render, params martini.Params, r *http.Request) {
 	username := protect(r)
 	if username == "" {
-		rnd.Redirect("/notPerm")
+		rnd.Redirect("/notAuth")
 		return
 	}
 
@@ -137,7 +137,7 @@ func ReadPostHandler(rnd render.Render, params martini.Params, r *http.Request) 
 func DeletePostHandler(rnd render.Render, params martini.Params, r *http.Request) {
 	c := protect(r)
 	if c == "" {
-		rnd.Redirect("/notPerm")
+		rnd.Redirect("/notAuth")
 		return
 	}
 

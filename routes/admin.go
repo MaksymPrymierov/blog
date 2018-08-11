@@ -11,14 +11,14 @@ import (
 func AdminHandler(rnd render.Render, r *http.Request) {
 	username := protect(r)
 	if username == "" {
-		rnd.Redirect("http://google.com")
+		rnd.Redirect("/notAuth")
 	}
 
 	thisUser := users.UsersTable{}
 	usersTables.FindId(username).One(&thisUser)
 	if thisUser.Permission != "admin" {
-		rnd.Redirect("http://google.com")
+		rnd.Redirect("/notPerm")
 	}
 
-	rnd.HTML(200, "admin", nil)
+	rnd.HTML(200, "admin", username)
 }

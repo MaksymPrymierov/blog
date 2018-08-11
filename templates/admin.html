@@ -1,1 +1,29 @@
-Админ панель)))))
+<div class="position-relative js-header-wrapper">
+    <header class="Header f5" role="banner">
+      <div class="d-flex flex-justify-between px-3 container-lg con-px-1">
+        <div class="HeaderMenu d-flex flex-justify-between flex-auto">
+          <div class="d-flex">
+            <ul class="d-flex pl-2 flex-items-center text-bold list-style-none">
+							<li>
+								<a class="js-selected-navigation-item HeaderNavlink px-2 con-link-1" href="/">Main Page</a>
+							</li>
+							<li>
+								<a class="js-selected-navigation-item HeaderNavlink px-2 con-link-1" href="/write">Write Post</a>
+							</li>
+            </ul>
+          </div>
+          <div class="d-flex">
+            <ul class="d-flex pl-2 flex-items-center text-bold list-style-none">
+              <li>
+                <a class="js-selected-navigation-item HeaderNavlink px-2 con-link-1" href="/">{{ . }}</a>
+							</li>
+              <li>
+                <a class="js-selected-navigation-item HeaderNavlink px-2 con-link-1" href="/exit">Log Out</a>
+							</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+

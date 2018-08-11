@@ -10,9 +10,10 @@ const (
 	errAuth     = "Not a valid password or login."
 	errRegLogin = "This login is already taken."
 	errRegEmail = "This email is already taken."
+	notPerm     = "You do not have sufficient rights to view this page."
 )
 
-func NotPermHandler(rnd render.Render) {
+func NotAuthHandler(rnd render.Render) {
 	rnd.HTML(200, "error", notAuth)
 }
 
@@ -30,4 +31,8 @@ func ErrRegLoginHandler(rnd render.Render) {
 
 func ErrRegEmailHandler(rnd render.Render) {
 	rnd.HTML(200, "error", errRegEmail)
+}
+
+func NotPermHandler(rnd render.Render) {
+	rnd.HTML(200, "error", notPerm)
 }

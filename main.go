@@ -41,7 +41,7 @@ func main() {
 	m.Post("/login", routes.PostLoginHandler)
 	m.Get("/register", routes.GetRegisterHandler)
 	m.Post("/register", routes.PostRegisterHandler)
-	m.Get("/notPerm", routes.NotPermHandler)
+	m.Get("/notAuth", routes.NotAuthHandler)
 	m.Get("/alreadyAuth", routes.AlreadyAuthHandler)
 	m.Get("/exit", routes.ExitSessionHandler)
 	m.Get("/errAuth", routes.ErrAuthHandler)
@@ -49,6 +49,7 @@ func main() {
 	m.Get("/errEmail", routes.ErrRegEmailHandler)
 	m.Get("/regSucc", routes.RegSuccHandler)
 	m.Get("/admin", routes.AdminHandler)
+	m.Get("/notPerm", routes.NotPermHandler)
 
 	m.RunOnAddr(":80")
 	m.Run()
