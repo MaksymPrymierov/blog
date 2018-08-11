@@ -4,6 +4,7 @@ import (
 	"../utils"
 )
 
+/* Data stored session */
 type sessionData struct {
 	Username string
 }
@@ -12,6 +13,7 @@ type Session struct {
 	data map[string]*sessionData
 }
 
+/* Init session */
 func NewSession() *Session {
 	s := new(Session)
 
@@ -20,6 +22,7 @@ func NewSession() *Session {
 	return s
 }
 
+/* Init session on username */
 func (s *Session) Init(username string) string {
 	sessionId := utils.GenerateId()
 
@@ -29,6 +32,7 @@ func (s *Session) Init(username string) string {
 	return sessionId
 }
 
+/* Get username on id session */
 func (s *Session) Get(sessionId string) string {
 	data := s.data[sessionId]
 
@@ -39,6 +43,7 @@ func (s *Session) Get(sessionId string) string {
 	return data.Username
 }
 
+/* Delete session from memory */
 func (s *Session) Delete(sessionId string) {
 	delete(s.data, sessionId)
 }

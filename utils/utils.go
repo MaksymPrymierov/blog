@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+/* Func return randome 16 bits numbers in string */
 func GenerateId() string {
 	b := make([]byte, 16)
 	rand.Read(b)
@@ -13,6 +14,7 @@ func GenerateId() string {
 	return fmt.Sprintf("%x", b)
 }
 
+/* Func generate id of text */
 func GenerateNameId(s string) string {
 	s = strings.ToLower(s)
 	s = strings.Replace(s, "/", "", -1)

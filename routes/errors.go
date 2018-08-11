@@ -4,15 +4,18 @@ import (
 	"github.com/martini-contrib/render"
 )
 
+/* Text for error handlers */
 const (
-	notAuth     = "To access this page, you need to login."
-	alreadyAuth = "You are already authorized."
-	errAuth     = "Not a valid password or login."
-	errRegLogin = "This login is already taken."
-	errRegEmail = "This email is already taken."
-	notPerm     = "You do not have sufficient rights to view this page."
+	notAuth      = "To access this page, you need to login."
+	alreadyAuth  = "You are already authorized."
+	errAuth      = "Not a valid password or login."
+	errRegLogin  = "This login is already taken."
+	errRegEmail  = "This email is already taken."
+	notPerm      = "You do not have sufficient rights to view this page."
+	notFoundPost = "Post not found."
 )
 
+/* Error handlers */
 func NotAuthHandler(rnd render.Render) {
 	rnd.HTML(200, "error", notAuth)
 }
@@ -35,4 +38,8 @@ func ErrRegEmailHandler(rnd render.Render) {
 
 func NotPermHandler(rnd render.Render) {
 	rnd.HTML(200, "error", notPerm)
+}
+
+func NotFoundPostHandler(rnd render.Render) {
+	rnd.HTML(200, "error", notFoundPost)
 }

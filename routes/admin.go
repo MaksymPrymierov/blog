@@ -4,21 +4,21 @@ import (
 	"net/http"
 
 	"github.com/martini-contrib/render"
-
-	"../db/users"
 )
 
+/* Render admin template */
 func AdminHandler(rnd render.Render, r *http.Request) {
-	username := protect(r)
-	if username == "" {
+	/* Check user session */
+	userData, err := getPublicCurrentUserData(r)
+	if err != nil {
 		rnd.Redirect("/notAuth")
 	}
 
-	thisUser := users.UsersTable{}
-	usersTables.FindId(username).One(&thisUser)
-	if thisUser.Permission != "admin" {
+	/* Check user permission */
+	if userData.Permission != "admin" {
 		rnd.Redirect("/notPerm")
 	}
 
-	rnd.HTML(200, "admin", username)
+	/* Render html template */
+	rnd.HTML(200, "admin", userData.Username)
 }

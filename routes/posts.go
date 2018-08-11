@@ -10,55 +10,71 @@ import (
 	"github.com/microcosm-cc/bluemonday"
 	"gopkg.in/russross/blackfriday.v2"
 
-	"../data"
 	"../db/documents"
 	"../models"
+	"../models/data"
 	"../utils"
 )
 
+/* Render write template */
 func WriteHandler(rnd render.Render, r *http.Request) {
-	username := protect(r)
-	if username == "" {
+	/* Init user data and check user session */
+	userData, err := getPublicCurrentUserData(r)
+	if err != nil {
 		rnd.Redirect("/notAuth")
 		return
 	}
 
+	/* Init post data */
 	post := models.Post{}
 
-	date := data.PostsData{post, username}
+	/* Init PostsData */
+	data := data.PostsData{post, userData.Username}
 
-	rnd.HTML(200, "write", date)
+	/* Render html template */
+	rnd.HTML(200, "write", data)
 }
 
+/* Save post in database */
 func CreatePostHandler(rnd render.Render, r *http.Request) {
-	username := protect(r)
-	if username == "" {
+	/* Get data in current user session */
+	userData, err := getPublicCurrentUserData(r)
+	if err != nil {
 		rnd.Redirect("/notAuth")
 		return
 	}
 
+	/* Init and setting html cleaner */
 	p := bluemonday.NewPolicy()
 	p.AllowStandardURLs()
 	p.AllowElements("br")
 
+	/* Write data of form */
 	id := r.FormValue("id")
 	title := r.FormValue("title")
 	contentMarkdown := r.FormValue("contentMarkdown")
+
+	/* Clear html tegs in text which textarea */
 	contentMarkdown = p.Sanitize(contentMarkdown)
 
+	/* Convert markdown tegs in html tegs */
 	contentHTML := blackfriday.Run([]byte(contentMarkdown))
 	contentHTML = []byte(strings.Replace(string(contentHTML), "\n", " <br> ", -1))
 
+	/* Get current time */
 	currentTime := models.GetCurrentTime()
 
+	/* Init posts data */
 	postDocument := documents.PostDocument{
 		id,
 		title,
 		string(contentHTML),
 		contentMarkdown,
 		currentTime,
-		username,
+		userData.Username,
 	}
+
+	/* Write data posts in data base */
 	if id != "" {
 		fmt.Println("old post")
 		postsCollection.UpdateId(id, postDocument)
@@ -74,22 +90,24 @@ func CreatePostHandler(rnd render.Render, r *http.Request) {
 		}
 	}
 
+	/* Redirect in main page */
 	rnd.Redirect("/")
 }
 
+/* Render edite template */
 func EditPostHandler(rnd render.Render, params martini.Params, r *http.Request) {
-	username := protect(r)
-	if username == "" {
+	userData, err := getPublicCurrentUserData(r)
+	if err != nil {
 		rnd.Redirect("/notAuth")
 		return
 	}
 
+	/* Init Post data, and check post id */
 	id := params["id"]
-
 	postDocument := documents.PostDocument{}
-	err := postsCollection.FindId(id).One(&postDocument)
+	err = postsCollection.FindId(id).One(&postDocument)
 	if err != nil {
-		rnd.Redirect("/")
+		rnd.Redirect("/notFoundPost")
 		return
 	}
 	post := models.Post{
@@ -101,25 +119,29 @@ func EditPostHandler(rnd render.Render, params martini.Params, r *http.Request) 
 		postDocument.Owner,
 	}
 
+	/* Replate html teg <br> on symbol '\n' */
 	post.ContentMarkdown = strings.Replace(post.ContentMarkdown, "<br>", "\n", -1)
 
-	date := data.PostsData{post, username}
+	/* Init PostsData */
+	data := data.PostsData{post, userData.Username}
 
-	rnd.HTML(200, "write", date)
+	/* Render html template */
+	rnd.HTML(200, "write", data)
 }
 
+/* Render read template */
 func ReadPostHandler(rnd render.Render, params martini.Params, r *http.Request) {
-	username := protect(r)
+	/* Init user data */
+	userData, _ := getPublicCurrentUserData(r)
 
+	/* Init post data and check post id */
 	id := params["id"]
-
 	postDocument := documents.PostDocument{}
 	err := postsCollection.FindId(id).One(&postDocument)
 	if err != nil {
-		rnd.Redirect("/")
+		rnd.Redirect("/notFoundPost")
 		return
 	}
-
 	post := models.Post{
 		postDocument.Id,
 		postDocument.Title,
@@ -129,25 +151,30 @@ func ReadPostHandler(rnd render.Render, params martini.Params, r *http.Request) 
 		postDocument.Owner,
 	}
 
-	date := data.PostsData{post, username}
+	/* Init PostsData */
+	data := data.PostsData{post, userData.Username}
 
-	rnd.HTML(200, "read", date)
+	rnd.HTML(200, "read", data)
 }
 
+/* Delete post from database */
 func DeletePostHandler(rnd render.Render, params martini.Params, r *http.Request) {
-	c := protect(r)
-	if c == "" {
+	/* Check user session */
+	if getCurrentUserId(r) == "" {
 		rnd.Redirect("/notAuth")
 		return
 	}
 
+	/* Check post id and save id in "params" */
 	id := params["id"]
 	if id == "" {
-		rnd.Redirect("/")
+		rnd.Redirect("/notFoundPost")
 		return
 	}
 
+	/* Remove post */
 	postsCollection.RemoveId(id)
 
+	/* Redirect in main page */
 	rnd.Redirect("/")
 }

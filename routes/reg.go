@@ -1,7 +1,6 @@
 package routes
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/martini-contrib/render"
@@ -10,39 +9,40 @@ import (
 	"../utils"
 )
 
+/* Render register template */
 func GetRegisterHandler(rnd render.Render, r *http.Request) {
-	c := protect(r)
-	if c != "" {
+	/* Check user session */
+	if getCurrentUserId(r) != "" {
 		rnd.Redirect("/alreadyAuth")
 		return
 	}
 
+	/* Render html template */
 	rnd.HTML(200, "register", nil)
 }
 
+/* Save user in database */
 func PostRegisterHandler(rnd render.Render, r *http.Request) {
-	c := protect(r)
-	if c != "" {
+	/* Check user session */
+	if getCurrentUserId(r) != "" {
 		rnd.Redirect("/alreadyAuth")
 		return
 	}
 
-	id := ""
+	/* User data init */
 	email := r.FormValue("email")
 	username := r.FormValue("username")
 	password := r.FormValue("password")
-	perm := ""
-
+	perm := "user"
+	id := utils.GenerateNameId(username)
 	userTable := users.UsersTable{id, email, username, password, perm}
-	fmt.Println("createuser")
-	id = utils.GenerateNameId(username)
-	perm = "user"
-	userTable.Id = id
-	userTable.Permission = perm
+
+	/* Check login and save user data on data base */
 	err := usersTables.Insert(userTable)
 	if err != nil {
 		rnd.Redirect("/errLogin")
 	}
 
+	/* Redirect in message */
 	rnd.Redirect("/regSucc")
 }
