@@ -6,6 +6,7 @@ import (
 
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
+	"gopkg.in/mgo.v2/bson"
 	"labix.org/v2/mgo"
 
 	"../db/users"
@@ -132,4 +133,11 @@ func getPublicCurrentUserData(r *http.Request) (models.PublicUsersData, error) {
 /* Function return public information about user current session */
 func getPrivateCurrentUserData(r *http.Request) (models.Users, error) {
 	return getPrivateUserData(getCurrentUserId(r))
+}
+
+/* Find user of custom data */
+func findUserOfData(typeData, data string) (interface{}, error) {
+	result := users.UsersTable{}
+	err := usersTables.Find(bson.M{typeData: data}).One(&result)
+	return result, err
 }
