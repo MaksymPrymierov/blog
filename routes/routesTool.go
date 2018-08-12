@@ -30,6 +30,13 @@ func unescape(x string) interface{} {
 	return template.HTML(x)
 }
 
+func checkGroup(group string) bool {
+	if group != "admin" {
+		return false
+	}
+	return true
+}
+
 /* Init default server data */
 func Init() *martini.ClassicMartini {
 	/* Init session */
@@ -49,7 +56,7 @@ func Init() *martini.ClassicMartini {
 	m := martini.Classic()
 
 	/* Init martini render */
-	unescapeFuncMap := template.FuncMap{"unescape": unescape}
+	unescapeFuncMap := template.FuncMap{"unescape": unescape, "checkGroup": checkGroup}
 	m.Use(render.Renderer(render.Options{
 		Directory:  "templates",                         // Specify what path to load the templates from.
 		Layout:     "layout",                            // Specify a layout template. Layouts can call {{ yield }} to render the current template.

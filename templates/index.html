@@ -13,6 +13,11 @@
 								<a class="js-selected-navigation-item HeaderNavlink px-2 con-link-1" href="/write">Write Post</a>
 							</li>
               {{ end }}
+              {{ if $data.UserData.Permission | checkGroup }}
+              <li>
+                <a class="js-selected-navidation-item HeaderNavlink px-2 con-link-1" href="/admin">Admin Panel</a>
+              </li>
+              {{ end }}
             </ul>
           </div>
           <div class="d-flex">
