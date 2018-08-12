@@ -21,7 +21,7 @@ func WriteHandler(rnd render.Render, r *http.Request) {
 	/* Init user data and check user session */
 	userData, err := getPublicCurrentUserData(r)
 	if err != nil {
-		rnd.Redirect("/notAuth")
+		getErrorHandler(rnd, 1)
 		return
 	}
 
@@ -40,7 +40,7 @@ func CreatePostHandler(rnd render.Render, r *http.Request) {
 	/* Get data in current user session */
 	userData, err := getPublicCurrentUserData(r)
 	if err != nil {
-		rnd.Redirect("/notAuth")
+		getErrorHandler(rnd, 1)
 		return
 	}
 
@@ -98,7 +98,7 @@ func CreatePostHandler(rnd render.Render, r *http.Request) {
 func EditPostHandler(rnd render.Render, params martini.Params, r *http.Request) {
 	userData, err := getPublicCurrentUserData(r)
 	if err != nil {
-		rnd.Redirect("/notAuth")
+		getErrorHandler(rnd, 1)
 		return
 	}
 
@@ -107,7 +107,7 @@ func EditPostHandler(rnd render.Render, params martini.Params, r *http.Request) 
 	postDocument := documents.PostDocument{}
 	err = postsCollection.FindId(id).One(&postDocument)
 	if err != nil {
-		rnd.Redirect("/notFoundPost")
+		getErrorHandler(rnd, 7)
 		return
 	}
 	post := models.Post{
@@ -139,7 +139,7 @@ func ReadPostHandler(rnd render.Render, params martini.Params, r *http.Request) 
 	postDocument := documents.PostDocument{}
 	err := postsCollection.FindId(id).One(&postDocument)
 	if err != nil {
-		rnd.Redirect("/notFoundPost")
+		getErrorHandler(rnd, 7)
 		return
 	}
 	post := models.Post{
@@ -161,14 +161,14 @@ func ReadPostHandler(rnd render.Render, params martini.Params, r *http.Request) 
 func DeletePostHandler(rnd render.Render, params martini.Params, r *http.Request) {
 	/* Check user session */
 	if getCurrentUserId(r) == "" {
-		rnd.Redirect("/notAuth")
+		getErrorHandler(rnd, 1)
 		return
 	}
 
 	/* Check post id and save id in "params" */
 	id := params["id"]
 	if id == "" {
-		rnd.Redirect("/notFoundPost")
+		getErrorHandler(rnd, 7)
 		return
 	}
 

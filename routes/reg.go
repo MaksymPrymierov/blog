@@ -13,7 +13,7 @@ import (
 func GetRegisterHandler(rnd render.Render, r *http.Request) {
 	/* Check user session */
 	if getCurrentUserId(r) != "" {
-		rnd.Redirect("/alreadyAuth")
+		getErrorHandler(rnd, 2)
 		return
 	}
 
@@ -26,32 +26,50 @@ func PostRegisterHandler(rnd render.Render, r *http.Request) {
 
 	/* Check user session */
 	if getCurrentUserId(r) != "" {
-		rnd.Redirect("/alreadyAuth")
+		getErrorHandler(rnd, 2)
 		return
 	}
 
 	/* Write username */
 	username := r.FormValue("username")
 
+	/* Check len username */
+	if utils.CheckLen(username, 4, 30) != true {
+		getErrorHandler(rnd, 8)
+		return
+	}
+
 	/* Check username */
 	_, checkUser := findUserOfData("_username", username)
 	if checkUser == nil {
-		rnd.Redirect("/errLogin")
+		getErrorHandler(rnd, 4)
 		return
 	}
 
 	/* Write email */
 	email := r.FormValue("email")
 
+	/* Check len email */
+	if utils.CheckLen(email, 4, 60) != true {
+		getErrorHandler(rnd, 8)
+		return
+	}
+
 	/* Check email */
 	_, checkEmail := findUserOfData("_email", email)
 	if checkEmail == nil {
-		rnd.Redirect("/errEmail")
+		getErrorHandler(rnd, 5)
 		return
 	}
 
 	/* Write password */
 	password := r.FormValue("password")
+
+	/* Check len password */
+	if utils.CheckLen(password, 4, 120) != true {
+		getErrorHandler(rnd, 8)
+		return
+	}
 
 	/* Set permission */
 	perm := "user"
@@ -63,7 +81,7 @@ func PostRegisterHandler(rnd render.Render, r *http.Request) {
 	/* Save user data in data base */
 	err := usersTables.Insert(userTable)
 	if err != nil {
-		rnd.Redirect("/errLogin")
+		getErrorHandler(rnd, 4)
 	}
 
 	/* Redirect in message */

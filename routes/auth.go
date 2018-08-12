@@ -13,7 +13,7 @@ import (
 func GetLoginHandler(rnd render.Render, r *http.Request) {
 	/* Check user session */
 	if getCurrentUserId(r) != "" {
-		rnd.Redirect("/alreadyAuth")
+		getErrorHandler(rnd, 2)
 		return
 	}
 
@@ -25,7 +25,7 @@ func GetLoginHandler(rnd render.Render, r *http.Request) {
 func PostLoginHandler(rnd render.Render, r *http.Request, w http.ResponseWriter) {
 	/* Check user sesssion */
 	if getCurrentUserId(r) != "" {
-		rnd.Redirect("/alreadyAuth")
+		getErrorHandler(rnd, 2)
 		return
 	}
 
@@ -33,14 +33,14 @@ func PostLoginHandler(rnd render.Render, r *http.Request, w http.ResponseWriter)
 	username := r.FormValue("username")
 	user, err := getPrivateUserData(utils.GenerateNameId(username))
 	if err != nil {
-		rnd.Redirect("/errAuth")
+		getErrorHandler(rnd, 3)
 		return
 	}
 
 	/* Verification password */
 	password := r.FormValue("password")
 	if user.Password != password {
-		rnd.Redirect("errAuth")
+		getErrorHandler(rnd, 3)
 		return
 	}
 
@@ -61,7 +61,7 @@ func PostLoginHandler(rnd render.Render, r *http.Request, w http.ResponseWriter)
 func ExitSessionHandler(rnd render.Render, r *http.Request) {
 	/* Check user session */
 	if getCurrentUserId(r) == "" {
-		rnd.Redirect("/notAuth")
+		getErrorHandler(rnd, 1)
 		return
 	}
 

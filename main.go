@@ -34,13 +34,7 @@ func main() {
 	m.Post("/register", routes.PostRegisterHandler)
 
 	/* Error Routes */
-	m.Get("/notAuth", routes.NotAuthHandler)
-	m.Get("/alreadyAuth", routes.AlreadyAuthHandler)
-	m.Get("/errAuth", routes.ErrAuthHandler)
-	m.Get("/errLogin", routes.ErrRegLoginHandler)
-	m.Get("/errEmail", routes.ErrRegEmailHandler)
-	m.Get("/notPerm", routes.NotPermHandler)
-	m.Get("/notFoundPost", routes.NotFoundPostHandler)
+	m.Get("/error/:id", routes.ErrorHandler)
 
 	/* Message Routes */
 	m.Get("/regSucc", routes.RegSuccHandler)

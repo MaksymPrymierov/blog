@@ -34,3 +34,14 @@ func GenerateNameId(s string) string {
 	s = strings.Replace(s, " ", "-", -1)
 	return s
 }
+
+// Function return true if string >= min or <= max
+func CheckLen(s string, min, max int) bool {
+	lenString := len(s)
+
+	if lenString >= min && lenString <= max {
+		return true
+	} else {
+		return false
+	}
+}

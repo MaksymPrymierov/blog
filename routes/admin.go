@@ -11,12 +11,12 @@ func AdminHandler(rnd render.Render, r *http.Request) {
 	/* Check user session */
 	userData, err := getPublicCurrentUserData(r)
 	if err != nil {
-		rnd.Redirect("/notAuth")
+		getErrorHandler(rnd, 1)
 	}
 
 	/* Check user permission */
 	if userData.Permission != "admin" {
-		rnd.Redirect("/notPerm")
+		getErrorHandler(rnd, 6)
 	}
 
 	/* Render html template */
