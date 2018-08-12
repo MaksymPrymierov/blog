@@ -33,9 +33,9 @@
 	<div class="con-content-panel con-pl-3 position-relative">
     <form class="post-form con-post" role="form" action="/createPost" accept-charset="UTF-8" method="POST">
       <input type="hidden" id="id" name="id" value="{{$data.DataPosts.Id}}">
-      <input type="text" id="title" class="form-control input-block input-contrast" maxlength="120" name="title" aria-label="Title post" placeholder="Title post..." autocomplete="off" value="{{$data.DataPosts.Title}}" required>
+      <input type="text" id="title" class="form-control input-block input-contrast" maxlength="60" name="title" aria-label="Title post" placeholder="Title post..." autocomplete="off" value="{{$data.DataPosts.Title}}" required>
       <div class="post-elements">
-        <textarea id="contentMarkdown" class="file-editor-textarea" rows="17" name="contentMarkdown" placeholder="Write text here" aria-label="Write text here" wrap="soft | hard">{{$data.DataPosts.ContentMarkdown}}</textarea>
+        <textarea id="contentMarkdown" class="file-editor-textarea" rows="17" name="contentMarkdown" maxlength="45000"  placeholder="Write text here" aria-label="Write text here" wrap="soft | hard">{{$data.DataPosts.ContentMarkdown}}</textarea>
       </div>
       <div class="post-elements post-end">
         <button type="submit" class="btn float-left">Save Post</button>

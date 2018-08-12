@@ -402,8 +402,12 @@ button, html [type="button"], [type="reset"], [type="submit"] {
   padding-left: 16px !important;
   float: left !important;
   width: 25%;
+  min-height: 400px;
   padding-top: 16px !important;
   padding-bottom: 16px !important;
+  border-width: 0px 1px 0px 0px;
+  border-style: solid;
+  border-color: #eaecef;
 }
 
 .admin-botton {
@@ -414,5 +418,51 @@ button, html [type="button"], [type="reset"], [type="submit"] {
 
 .admin-btm {
   padding-top: 4px !important;
-  padding-bottom: 4px !important;}
+  padding-bottom: 4px !important;
+}
+
+.admin-content {
+  padding-left: 8px !important;
+  float: left !important;
+  width: 75%;
+  min-height: 400px;
+}
+
+.admin-content-link {
+  position: static;
+  background-color: #fff;
+  border-bottom: solid 1px #d1d5da;
+  top: 0 !important;
+  display: flex;
+  justify-content: space-between;
+}
+
+.admin-content-nav {
+  display: flex;
+  margin-bottom: -1px;
+}
+
+.admin-content-nav-link {
+  padding: 16px 8px;
+  margin-right: 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #586069;
+  text-align: center;
+  border-bottom: 2px solid transparent;
+}
+
+.admin-content-nav-link:hover {
+  color: black;
+  border-bottom-color: lightgray;
+}
+
+.admin-content-nav-link.selected {
+  font-weight: 600;
+  color: #24292e;
+  border-bottom-color: #0C0026;
+}
+
+.width-full {
+  width: 100% !important;
 }

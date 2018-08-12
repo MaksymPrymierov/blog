@@ -76,10 +76,8 @@ func CreatePostHandler(rnd render.Render, r *http.Request) {
 
 	/* Write data posts in data base */
 	if id != "" {
-		fmt.Println("old post")
 		postsCollection.UpdateId(id, postDocument)
 	} else {
-		fmt.Println("new post")
 		id = utils.GenerateNameId(title)
 		postDocument.Id = id
 		err := postsCollection.Insert(postDocument)
