@@ -51,7 +51,7 @@ func PostRegisterHandler(rnd render.Render, r *http.Request) {
 
 	/* Check len email */
 	if utils.CheckLen(email, 4, 60) != true {
-		getErrorHandler(rnd, 8)
+		getErrorHandler(rnd, 9)
 		return
 	}
 
@@ -67,7 +67,7 @@ func PostRegisterHandler(rnd render.Render, r *http.Request) {
 
 	/* Check len password */
 	if utils.CheckLen(password, 4, 120) != true {
-		getErrorHandler(rnd, 8)
+		getErrorHandler(rnd, 10)
 		return
 	}
 

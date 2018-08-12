@@ -17,7 +17,9 @@ var errors = []string{
 	"This email is already taken.",                         // id 5
 	"You do not have sufficient rights to view this page.", // id 6
 	"Post not found.",                                      // id 7
-	"Login and password must be at least 4 characters and not more than 30.", // id 8
+	"Incorrect login.",                                     // id 8
+	"Incorrect email.",                                     // id 9
+	"Incorrect password",                                   // id 10
 }
 
 /* Error handlers */

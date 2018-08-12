@@ -29,16 +29,32 @@ func PostLoginHandler(rnd render.Render, r *http.Request, w http.ResponseWriter)
 		return
 	}
 
-	/* Verification login */
+	/* Init username */
 	username := r.FormValue("username")
+
+	/* Check len username */
+	if utils.CheckLen(username, 4, 30) != true {
+		getErrorHandler(rnd, 8)
+		return
+	}
+
+	/* Verification login */
 	user, err := getPrivateUserData(utils.GenerateNameId(username))
 	if err != nil {
 		getErrorHandler(rnd, 3)
 		return
 	}
 
-	/* Verification password */
+	/* Init password */
 	password := r.FormValue("password")
+
+	/* Check len password */
+	if utils.CheckLen(password, 4, 120) != true {
+		getErrorHandler(rnd, 8)
+		return
+	}
+
+	/* Verification password */
 	if user.Password != password {
 		getErrorHandler(rnd, 3)
 		return
