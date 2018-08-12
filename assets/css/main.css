@@ -1,0 +1,83 @@
+* {
+ box-sizing: border-box;
+ font-family: 'Open Sans', sans-serif;
+}
+
+/*===============================*/
+/*=====ПЕРЕДЕЛАТЬ=================*/
+.position-relative {
+  position: relative !important;
+}
+
+.Header {
+  height: 60px;
+  z-index: 32;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  color: #f6f9f2;
+  background-color: #211324;
+}
+
+.f5 {
+  font-size: 14px !important;
+}
+
+.d-flex {
+  display: flex;
+}
+/*===============================*/
+
+.container {
+
+	min-width: 980px;
+	margin: 0 auto;
+}
+
+.clearfix {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.header {
+	color: #f6f9f2;
+	background-color: #211324;
+	font-size: 14px
+	padding: 12px
+}
+
+.main-header {
+	font-size: 
+}
+
+.header a {
+	color: #f6f9f2;
+	text-decoration: none;
+}
+.header ul {
+	list-style-type: none;
+	list-style: none;
+	font-size: 0;
+	width: 100%;
+}
+
+.header li {
+	display: inline-block;
+	font-size: 18px;
+	font-weight: bold;
+	margin: 20px;
+}
