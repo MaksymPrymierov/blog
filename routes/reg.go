@@ -85,5 +85,6 @@ func PostRegisterHandler(rnd render.Render, r *http.Request) {
 	}
 
 	/* Redirect in message */
-	rnd.Redirect("/regSucc")
+	getMessageHandler(rnd, 1)
+	return
 }

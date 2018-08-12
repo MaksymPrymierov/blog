@@ -37,7 +37,7 @@ func main() {
 	m.Get("/error/:id", routes.ErrorHandler)
 
 	/* Message Routes */
-	m.Get("/regSucc", routes.RegSuccHandler)
+	m.Get("/message/:id", routes.MessageHandler)
 
 	/* Admin Panel Routes */
 	m.Get("/admin", routes.AdminHandler)
