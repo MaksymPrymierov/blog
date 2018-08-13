@@ -3,26 +3,35 @@
 <head>
  <meta charset="UTF-8">
  <title>CONOSW</title>
- <link href="/assets/css/style.css" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
+ <link href="../assets/css/normalize.css" rel="stylesheet">
+ <link href="../assets/css/main.css" rel="stylesheet">
+ 
+ <!--<link href="/assets/css/style.css" rel="stylesheet"> -->
 </head>
 <body>
 
   {{ yield }}
 
- <div class="footer container-lg px-3 con-pt-1 con-pl-4" role="contentinfo">
-    <div class="footer position-relative d-flex flex-justify-between text-gray con-bt-1">
-      <ul class="list-style-none d-flex flex-wrap con-mt-6 con-ml-3 f6">
-        <li class="mr-3">
+ <div class="panel footer">
+    <div class="container main-footer">
+      <ul class="about">
+        <li>
           <span>© 2018 Connor41</span> 
         </li>
-        <li class="mr-3">
-          <a target="_blank" href="https://github.com/connor41/blog">GitHub</a> 
+        <li>
+          <a class="btn" target="_blank" href="https://github.com/ya-alexandr-86">Front-End by Alex Ya</a>
         </li>
-        <li class="mr-3">
-          <a target="_blank" href="https://gitlab.com/connor41/blog">GitLab</a>
+        <li>
+          <a class="btn" target="_blank" href="https://github.com/connor41/blog">GitHub</a> 
         </li>
-      </ul>
-    </div>
+        <li>
+          <a class="btn" target="_blank" href="https://gitlab.com/connor41/blog">GitLab</a>
+        </li>
+      </ul>  
+    </div>    
   </div>
+
 </body>
 </html>
+

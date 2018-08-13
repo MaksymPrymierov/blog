@@ -1,31 +1,43 @@
 {{ $data := . }}
 {{ template "header" $data }}
+  <div class="content">
+    <div class="container">
 
-<div class="index flex-justify-between px-3 container-lg con-px-i">
-  <div class="con-info-index-panel con-pl-3 con-bb-2 position-relative">
-    <h1>Main Page</h1>
-  </div>
-{{ range $value := $data.DataPosts }}
-	<div class="con-content-panel con-pl-3 position-relative">
-    <div class="con-post-block con-pl-3">
-      <div class="post-all-content">
-        <a href="/readPost/{{ $value.Id }}" class="post-link postTitle">{{ $value.Title }}</a>
-        <div class="botton-block">
-          {{ if $data.UserData.Id }}
-          <a href="/editPost/{{ $value.Id }}"><button type="botton" class="btn botton-box">Edit Post</button></a>
-          <a href="/deletePost/{{ $value.Id }}"><button type="botton" class="btn botton-box">Delete Post</button></a>
-          {{ end }}
-        </div>
-      <ul class="list-style-none d-flex flex-wrap con-ml-3 f6 date">
-        <li class="mr-3">
-          <span class="text-gray">{{$value.Owner}}</span>
-        </li>
-        <li class="mr-3">
-          <span class="text-gray">{{$value.Time.Month}} {{$value.Time.Day}}</span> 
-        </li>
-      </ul>
+      <div class="">
+        <h1>Main Page</h1>
+        <hr>
       </div>
+
+      {{ range $value := $data.DataPosts }}
+
+    	<div class="post-block">
+        <div class="post shadow">
+          <div class="subject">
+            <a href="/readPost/{{ $value.Id }}" title="{{$value.Title}}" class="post-link postTitle">
+              <h2>{{ $value.Title }}</h2>
+            </a>
+            <div class="btn-block">
+              {{ if $data.UserData.Id }}
+              <a class="btn btn-edit" title="Edit Post" href="/editPost/{{$value.Id}}">
+                Edit Post
+              </a>
+              <a class="btn btn-del" title="Delete Post" href="/deletePost/{{ $value.Id }}">
+                Delete Post
+              </a>
+              {{ end }}
+
+            </div>
+          </div>
+          <ul class="post-info">
+            <li class="post-owner">
+              <span class="text-gray">{{$value.Owner}}</span>
+            </li>
+            <li class="post-date">
+              <span class="text-gray">{{$value.Time.Month}} {{$value.Time.Day}}</span> 
+            </li>
+          </ul>
+        </div>
+      </div>
+      {{ end }}
     </div>
-	</div>
-  {{ end }}
-</div> 
+  </div>
