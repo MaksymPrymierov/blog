@@ -1,0 +1,64 @@
+
+.main-header {
+	display: flex;
+	justify-content: space-between;
+
+	flex-grow: 0;
+
+	width: 100%;
+	font-size: var(--fontSizeBigger);
+}
+
+.main-header a {
+	color: var(--panelFontColor);
+	text-decoration: none;
+}
+.main-header ul {
+	list-style-type: none;
+	list-style: none;
+	font-size: 0;
+	width: 100%;
+	padding: 0;
+}
+
+.main-header a {	
+	font-size: 18px;
+	font-weight: bold;
+	
+}
+
+.main-header a:hover,
+.main-header a:active {	
+	color: var(--additionalColor);
+
+}
+
+.menu-block {
+	width: 50%;
+}
+
+
+
+.main-header ul {
+	display: flex;
+	flex-direction: row;
+
+}
+
+.menu-block {
+	justify-content: flex-start;
+
+}
+
+.menu-block li {
+	margin: 20px 20px 20px 0;
+}
+
+.login-block {
+	justify-content: flex-end;
+
+}
+.login-block li {
+	margin: 20px 0 20px 20px;
+}
+

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>CONOSW</title>
+ <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
+ <link href="../assets/css/normalize.css" rel="stylesheet">
+ <link href="../assets/css/main.css" rel="stylesheet"><!--new style file-->
+
+ <!-- <link href="/assets/css/style.css" rel="stylesheet"> -->
+</head>
+<body>
+
+  <!-- {{ $data := . }} -->
+  <!-- HEADER -->
+  <header class="panel">
+    <div class="main-header container">
+      <ul class="menu-block">
+        <li><a class="btn" href="#">Main Page</a></li>
+        <li><a class="btn" href="#">Write Post</a></li>
+      </ul>
+      <ul class="login-block ">
+        <li><a class="btn" href="#">AlexYa</a></li>
+        <li><a class="btn" href="#">Logout</a></li>
+      </ul>
+    </div>
+  </header>
+
+
+  <!-- CONTENT BLOCK -->
+  <div class="content">
+    <div class="container">
+
+      <div class="">
+        <h1>Main Page</h1>
+        <hr>
+      </div>
+
+      <!-- {{ range $value := $data.DataPosts }} -->
+
+    	<div class="post-block">
+        <div class="post shadow">
+          <div class="subject">
+            <a href="/readPost/{{ $value.Id }}" class="post-link postTitle">
+              <h2>This is post title</h2> <!-- {{ $value.Title }} -->          
+            </a>
+            <div class="btn-block">
+              <!-- {{ if $data.UserData.Id }} -->
+              <a class="btn btn-edit" href="/editPost/{{$value.Id}}">
+                Edit Post
+              </a>
+              <a class="btn btn-del" href="/deletePost/{{ $value.Id }}">
+                Delete Post
+              </a>
+
+              <!-- {{ end }} -->
+
+            </div>
+          </div>
+          <ul class="post-info">
+            <li class="post-owner">
+              <span class="text-gray">author<!-- {{$value.Owner}} --></span>
+            </li>
+            <li class="post-date">
+              <span class="text-gray">Date<!-- {{$value.Time.Month}} {{$value.Time.Day}} --></span> 
+            </li>
+          </ul>
+        </div>
+
+        <div class="post shadow">
+          <div class="subject">
+            <a href="/readPost/{{ $value.Id }}" class="post-link postTitle">
+              <h2>This is post title</h2> <!-- {{ $value.Title }} -->          
+            </a>
+            <div class="btn-block">
+              <!-- {{ if $data.UserData.Id }} -->
+              <a class="btn btn-edit" href="/editPost/{{$value.Id}}">
+                Edit Post
+              </a>
+              <a class="btn btn-del" href="/deletePost/{{ $value.Id }}">
+                Delete Post
+              </a>
+
+              <!-- {{ end }} -->
+
+            </div>
+          </div>
+          <ul class="post-info">
+            <li class="post-owner">
+              <span class="text-gray">author<!-- {{$value.Owner}} --></span>
+            </li>
+            <li class="post-date">
+              <span class="text-gray">Date<!-- {{$value.Time.Month}} {{$value.Time.Day}} --></span> 
+            </li>
+          </ul>
+        </div>
+
+        <div class="post shadow">
+          <div class="subject">
+            <a href="/readPost/{{ $value.Id }}" class="post-link postTitle">
+              <h2>This is post title</h2> <!-- {{ $value.Title }} -->          
+            </a>
+            <div class="btn-block">
+              <!-- {{ if $data.UserData.Id }} -->
+              <a class="btn btn-edit" href="/editPost/{{$value.Id}}">
+                Edit Post
+              </a>
+              <a class="btn btn-del" href="/deletePost/{{ $value.Id }}">
+                Delete Post
+              </a>
+
+              <!-- {{ end }} -->
+
+            </div>
+          </div>
+          <ul class="post-info">
+            <li class="post-owner">
+              <span class="text-gray">author<!-- {{$value.Owner}} --></span>
+            </li>
+            <li class="post-date">
+              <span class="text-gray">Date<!-- {{$value.Time.Month}} {{$value.Time.Day}} --></span> 
+            </li>
+          </ul>
+        </div>
+
+
+        <div class="post shadow">
+          <div class="subject">
+            <a href="/readPost/{{ $value.Id }}" class="post-link postTitle">
+              <h2>This is post title</h2> <!-- {{ $value.Title }} -->          
+            </a>
+            <div class="btn-block">
+              <!-- {{ if $data.UserData.Id }} -->
+              <a class="btn btn-edit" href="/editPost/{{$value.Id}}">
+                Edit Post
+              </a>
+              <a class="btn btn-del" href="/deletePost/{{ $value.Id }}">
+                Delete Post
+              </a>
+
+              <!-- {{ end }} -->
+
+            </div>
+          </div>
+          <ul class="post-info">
+            <li class="post-owner">
+              <span class="text-gray">author<!-- {{$value.Owner}} --></span>
+            </li>
+            <li class="post-date">
+              <span class="text-gray">Date<!-- {{$value.Time.Month}} {{$value.Time.Day}} --></span> 
+            </li>
+          </ul>
+        </div>
+
+        <div class="post shadow">
+          <div class="subject">
+            <a href="/readPost/{{ $value.Id }}" class="post-link postTitle">
+              <h2>This is post title</h2> <!-- {{ $value.Title }} -->          
+            </a>
+            <div class="btn-block">
+              <!-- {{ if $data.UserData.Id }} -->
+              <a class="btn btn-edit" href="/editPost/{{$value.Id}}">
+                Edit Post
+              </a>
+              <a class="btn btn-del" href="/deletePost/{{ $value.Id }}">
+                Delete Post
+              </a>
+
+              <!-- {{ end }} -->
+
+            </div>
+          </div>
+          <ul class="post-info">
+            <li class="post-owner">
+              <span class="text-gray">author<!-- {{$value.Owner}} --></span>
+            </li>
+            <li class="post-date">
+              <span class="text-gray">Date<!-- {{$value.Time.Month}} {{$value.Time.Day}} --></span> 
+            </li>
+          </ul>
+        </div>
+
+        <div class="post shadow">
+          <div class="subject">
+            <a href="/readPost/{{ $value.Id }}" class="post-link postTitle">
+              <h2>This is post title</h2> <!-- {{ $value.Title }} -->          
+            </a>
+            <div class="btn-block">
+              <!-- {{ if $data.UserData.Id }} -->
+              <a class="btn btn-edit" href="/editPost/{{$value.Id}}">
+                Edit Post
+              </a>
+              <a class="btn btn-del" href="/deletePost/{{ $value.Id }}">
+                Delete Post
+              </a>
+
+              <!-- {{ end }} -->
+
+            </div>
+          </div>
+          <ul class="post-info">
+            <li class="post-owner">
+              <span class="text-gray">author<!-- {{$value.Owner}} --></span>
+            </li>
+            <li class="post-date">
+              <span class="text-gray">Date<!-- {{$value.Time.Month}} {{$value.Time.Day}} --></span> 
+            </li>
+          </ul>
+        </div>
+
+
+
+
+
+    	</div>
+
+
+
+
+      <!-- {{ end }} -->
+    </div>
+  </div> 
+
+
+
+
+  <!-- FOOTER -->
+  <div class="panel footer">
+    <div class="container main-footer">
+      <ul class="about">
+        <li>
+          <span>© 2018 Connor41</span> 
+        </li>
+        <li>
+          <a class="btn" target="_blank" href="https://github.com/connor41/blog">GitHub</a> 
+        </li>
+        <li>
+          <a class="btn" target="_blank" href="https://gitlab.com/connor41/blog">GitLab</a>
+        </li>
+      </ul>  
+    </div>    
+  </div>
+
+
+
+</body>
+</html>
+
+

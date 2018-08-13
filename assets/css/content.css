@@ -1,0 +1,65 @@
+.content {
+	flex-grow: 1;
+}
+
+
+
+.post-block {
+	min-height: 100%;
+}
+
+.post {
+	/*width: 100%;*/
+	border: 1px solid #211324;
+	border-radius: 5px;
+	padding: 10px;
+	margin: 20px;
+}
+
+.post .subject {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.post ul {
+	display: flex;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+
+}
+
+.post li {
+	margin-right: 10px;
+	font-style: italic;
+	color: gray;
+	font-size: var(--fontSizeSmaller);
+}
+
+.post-link {
+	text-decoration: none;
+	color: #211324;
+	font-weight: var(--fontWeightBold);
+	font-size: var(--fontSizeNormal);
+}
+
+.post-link:hover {
+	color: #9355a1;	
+}
+
+.post-link h2 {
+	margin: 0;
+}
+
+.post-info {
+
+}
+
+.post-owner {
+
+}
+
+.post-date {
+
+}
