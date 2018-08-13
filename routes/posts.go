@@ -1,7 +1,6 @@
 package routes
 
 import (
-	"fmt"
 	"net/http"
 	"strings"
 
@@ -29,7 +28,7 @@ func WriteHandler(rnd render.Render, r *http.Request) {
 	post := models.Post{}
 
 	/* Init PostsData */
-	data := data.PostsData{post, userData.Username}
+	data := data.PostsData{post, userData}
 
 	/* Render html template */
 	rnd.HTML(200, "write", data)
@@ -121,7 +120,7 @@ func EditPostHandler(rnd render.Render, params martini.Params, r *http.Request) 
 	post.ContentMarkdown = strings.Replace(post.ContentMarkdown, "<br>", "\n", -1)
 
 	/* Init PostsData */
-	data := data.PostsData{post, userData.Username}
+	data := data.PostsData{post, userData}
 
 	/* Render html template */
 	rnd.HTML(200, "write", data)
@@ -150,7 +149,7 @@ func ReadPostHandler(rnd render.Render, params martini.Params, r *http.Request) 
 	}
 
 	/* Init PostsData */
-	data := data.PostsData{post, userData.Username}
+	data := data.PostsData{post, userData}
 
 	rnd.HTML(200, "read", data)
 }

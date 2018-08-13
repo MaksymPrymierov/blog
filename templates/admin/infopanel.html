@@ -1,0 +1,8 @@
+{{ block "infoserver" .}}
+<div class="admin-content-link">
+  <nav class="admin-content-nav" role="navigation">
+    <a href="/admin" class="admin-content-nav-link selected" aria-selected="true" role="tab" title="Admin">Server Information</a>
+    <a href="/admin" class="admin-content-nav-link" aria-selected="true" role="tab" title="Admin">{{ . }}</a>
+  </nav>
+</div>
+{{ end }}

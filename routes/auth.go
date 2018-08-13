@@ -6,19 +6,23 @@ import (
 
 	"github.com/martini-contrib/render"
 
+	"../models/data"
 	"../utils"
 )
 
 /* Render login template */
 func GetLoginHandler(rnd render.Render, r *http.Request) {
+	userData, err := getPublicCurrentUserData(r)
 	/* Check user session */
-	if getCurrentUserId(r) != "" {
+	if err == nil {
 		getErrorHandler(rnd, 2)
 		return
 	}
 
+	data := data.GeneralData{userData}
+
 	/* Render html template */
-	rnd.HTML(200, "login", nil)
+	rnd.HTML(200, "login", data)
 }
 
 /* Create new user session */

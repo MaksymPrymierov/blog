@@ -6,19 +6,22 @@ import (
 	"github.com/martini-contrib/render"
 
 	"../db/users"
+	"../models/data"
 	"../utils"
 )
 
 /* Render register template */
 func GetRegisterHandler(rnd render.Render, r *http.Request) {
-	/* Check user session */
-	if getCurrentUserId(r) != "" {
+	userData, err := getPublicCurrentUserData(r)
+	if err == nil {
 		getErrorHandler(rnd, 2)
 		return
 	}
 
+	data := data.GeneralData{userData}
+
 	/* Render html template */
-	rnd.HTML(200, "register", nil)
+	rnd.HTML(200, "register", data)
 }
 
 /* Save user in database */

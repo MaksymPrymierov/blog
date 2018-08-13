@@ -4,6 +4,8 @@ import (
 	"net/http"
 
 	"github.com/martini-contrib/render"
+
+	"../models/data"
 )
 
 /* Render admin template */
@@ -19,6 +21,8 @@ func AdminHandler(rnd render.Render, r *http.Request) {
 		getErrorHandler(rnd, 6)
 	}
 
+	data := data.AdminData{userData}
+
 	/* Render html template */
-	rnd.HTML(200, "admin", userData.Username)
+	rnd.HTML(200, "admin", data)
 }

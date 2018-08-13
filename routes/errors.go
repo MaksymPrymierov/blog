@@ -1,10 +1,13 @@
 package routes
 
 import (
+	"net/http"
 	"strconv"
 
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
+
+	"../models/data"
 )
 
 /* Array for errors */
@@ -23,14 +26,18 @@ var errors = []string{
 }
 
 /* Error handlers */
-func ErrorHandler(rnd render.Render, params martini.Params) {
+func ErrorHandler(rnd render.Render, params martini.Params, r *http.Request) {
 	id, err := strconv.Atoi(params["id"])
 	if err != nil || id >= len(errors) {
 		rnd.HTML(200, "error", errors[0])
 		return
 	}
 
-	rnd.HTML(200, "error", errors[id])
+	userData, _ := getPublicCurrentUserData(r)
+
+	data := data.MessageData{userData, errors[id]}
+
+	rnd.HTML(200, "error", data)
 }
 
 func getErrorHandler(rnd render.Render, id int) {
