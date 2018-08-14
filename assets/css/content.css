@@ -1,5 +1,7 @@
 .content {
 	flex-grow: 1;
+  background-color: #f6f8fa !important;
+  padding-bottom: 200px;
 }
 
 
@@ -10,7 +12,8 @@
 
 .post {
 	/*width: 100%;*/
-	border: 1px solid #211324;
+	border: 1px solid #d1d5da;
+  background-color: #fff;
 	border-radius: 5px;
 	padding: 10px;
 	margin: 20px;
