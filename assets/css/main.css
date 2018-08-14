@@ -1,6 +1,7 @@
 @import url("./header.css");
 @import url("./content.css");
 @import url("./footer.css");
+@import url("./post-details.css");
 
 :root{
 	--fontSizeNormal: 14px;
@@ -38,9 +39,6 @@ body {
     box-sizing: border-box;*/
 }
 
-h1 {
-	color: gray;
-}
 
 .container {	
 	max-width: 980px;
@@ -123,7 +121,7 @@ h1 {
 	color: #ffffff;
 	/*text-transform: uppercase;*/
 	/*text-decoration: none;*/
-	box-shadow: 0 0 10px rgba(250, 250, 250, 0.5);
+	box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
 	background-color: #211324;
 	border: 1px solid #ffffff;
 	border-radius: 5px;
