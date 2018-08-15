@@ -18,14 +18,9 @@
             </a>
             <div class="btn-block">
               {{ if $data.UserData.Id }}
-              <a class="btn btn-edit" title="Edit Post" href="/editPost/{{$value.Id}}">
-                Edit Post
-              </a>
-              <a class="btn btn-del" title="Delete Post" href="/deletePost/{{ $value.Id }}">
-                Delete Post
-              </a>
+              <a class="btn btn-post" title="Edit Post" href="/editPost/{{$value.Id}}">Edit Post</a>
+              <a class="btn btn-post" title="Delete Post" href="/deletePost/{{ $value.Id }}">Delete Post</a>
               {{ end }}
-
             </div>
           </div>
           <ul class="post-info">
