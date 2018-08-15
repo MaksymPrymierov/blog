@@ -1,7 +1,7 @@
 @import url("./header.css");
 @import url("./content.css");
 @import url("./footer.css");
-@import url("./post-details.css");
+@import url("./post-detailed.css");
 
 :root{
 	--fontSizeNormal: 14px;
@@ -37,6 +37,11 @@ body {
 	/*position: relative;
     padding-bottom: 58px;
     box-sizing: border-box;*/
+}
+
+a {
+  color: #0366d6;
+  text-decoration: none;
 }
 
 h1 {

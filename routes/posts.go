@@ -58,7 +58,7 @@ func CreatePostHandler(rnd render.Render, r *http.Request) {
 
 	/* Convert markdown tegs in html tegs */
 	contentHTML := blackfriday.Run([]byte(contentMarkdown))
-	contentHTML = []byte(strings.Replace(string(contentHTML), "\n", " <br> ", -1))
+	contentHTML = []byte(strings.Replace(string(contentHTML), "\"", "\"", -1))
 
 	/* Get current time */
 	currentTime := models.GetCurrentTime()
@@ -117,7 +117,7 @@ func EditPostHandler(rnd render.Render, params martini.Params, r *http.Request) 
 	}
 
 	/* Replate html teg <br> on symbol '\n' */
-	post.ContentMarkdown = strings.Replace(post.ContentMarkdown, "<br>", "\n", -1)
+	//	post.ContentMarkdown = strings.Replace(post.ContentMarkdown, "<br>", "\n", -1)
 
 	/* Init PostsData */
 	data := data.PostsData{post, userData}
