@@ -1,6 +1,6 @@
 {{ $data := . }}  
 {{ template "header" $data }}
-<div class="index flex-justify-between px-3 container-lg con-px-i">
+<!-- <div class="index flex-justify-between px-3 container-lg con-px-i">
   <div class="con-info-index-panel con-pl-3 con-bb-2 position-relative">
     <h1>{{ $data.DataPosts.Title}}</h1>
   </div>
@@ -24,4 +24,36 @@
         </li>
       </ul>
   </div>
-</div>
+</div> -->
+  <div class="content">
+    <div class="container">
+      <div class="">
+        <h1>{{ $data.DataPosts.Title }}</h1>
+        <hr>
+      </div>
+      <div class="btn-block">
+        {{ if $data.UserData.Id }}
+        <a class="btn btn-post" title="Edit Post" href="/editPost/{{$data.DataPosts.Id}}">Edit Post</a>
+        <a class="btn btn-post" title="Delete Post" href="/deletePost/{{ $data.DataPosts.Id }}">Delete Post</a>
+        {{ end }}
+      </div>
+      <div class="post">
+      <div class="reader">
+        <article class="markdown-post">
+          {{ $data.DataPosts.ContentHTML | unescape }}
+        </article>
+      </div>
+        <ul class="post-info">
+          <li class="post-owner">
+            <span class="text-gray">Owner: {{$data.DataPosts.Owner}}</span>
+          </li>
+          <li class="post-date">
+            <span class="text-gray">Date: {{$data.DataPosts.Time.Year}} {{$data.DataPosts.Time.Month}} {{$data.DataPosts.Time.Day}}</span>
+          </li>
+          <li class="post-time">
+            <span class="text-gray">Time: {{$data.DataPosts.Time.Hour}}:{{$data.DataPosts.Time.Min}}:{{$data.DataPosts.Time.Sec}}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
