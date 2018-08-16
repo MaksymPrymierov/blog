@@ -4,12 +4,15 @@
 @import url("./post-detailed.css");
 
 :root{
+	/*fonts settings*/
 	--fontSizeNormal: 14px;
 	--fontSizeBigger: 18px;
 	--fontSizeSmaller: 10px;
 	--fontFamily: 'Open Sans', sans-serif;
 	--fontWeightNormal: 400;
 	--fontWeightBold: 700;
+
+	/*colors settings*/
 	--panelBackground: #211324;
 	--baseColor: #211324;
 	--additionalColor: #9355a1;
