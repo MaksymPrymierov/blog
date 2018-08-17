@@ -1,15 +1,18 @@
 @import url("./header.css");
 @import url("./content.css");
 @import url("./footer.css");
-@import url("./post-details.css");
+@import url("./post-detailed.css");
 
 :root{
+	/*fonts settings*/
 	--fontSizeNormal: 14px;
 	--fontSizeBigger: 18px;
 	--fontSizeSmaller: 10px;
 	--fontFamily: 'Open Sans', sans-serif;
 	--fontWeightNormal: 400;
 	--fontWeightBold: 700;
+
+	/*colors settings*/
 	--panelBackground: #211324;
 	--baseColor: #211324;
 	--additionalColor: #9355a1;
@@ -37,6 +40,11 @@ body {
 	/*position: relative;
     padding-bottom: 58px;
     box-sizing: border-box;*/
+}
+
+a {
+  color: #0366d6;
+  text-decoration: none;
 }
 
 h1 {
@@ -142,4 +150,20 @@ h1 {
 	border: 1px solid #ffffff;
 	border-radius: 5px;
 	cursor: pointer;
+}
+
+.input-block {
+  min-width: 30%;
+  padding: 6px 8px;
+  font-size: 16px;
+  line-height: 20px;
+  color: #24292e;
+  vertical-align: middle;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  border: 1px solid #d1d5da;
+  border-radius: 3px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }

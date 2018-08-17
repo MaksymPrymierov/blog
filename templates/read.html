@@ -1,30 +1,5 @@
 {{ $data := . }}  
 {{ template "header" $data }}
-<!-- <div class="index flex-justify-between px-3 container-lg con-px-i">
-  <div class="con-info-index-panel con-pl-3 con-bb-2 position-relative">
-    <h1>{{ $data.DataPosts.Title}}</h1>
-  </div>
-  <div class="con-content-panel con-pl-3 position-relative">
-    {{$data.DataPosts.ContentHTML | unescape }}
-        <div class="botton-block">
-          {{ if $data.UserData }}
-          <a href="/editPost/{{$data.DataPosts.Id}}"><button type="botton" class="btn botton-box">Edit Post</button></a>
-          <a href="/deletePost/{{$data.DataPosts.Id}}"><button type="botton" class="btn botton-box">Delete Post</button></a>
-          {{ end }}
-        </div>
-      <ul class="list-style-none flex-wrap con-ml-3 f6 date">
-        <li class="mr-3">
-          <span class="text-gray">Owner: {{$data.DataPosts.Owner}}</span>
-        </li>
-        <li class="mr-3">
-          <span class="text-gray">Date: {{$data.DataPosts.Time.Year}} {{$data.DataPosts.Time.Month}} {{$data.DataPosts.Time.Day}}</span> 
-        </li>
-        <li class="mr-3">
-          <span class="text-gray">Time: {{$data.DataPosts.Time.Hour}}:{{$data.DataPosts.Time.Min}}:{{$data.DataPosts.Time.Sec}}</span>
-        </li>
-      </ul>
-  </div>
-</div> -->
   <div class="content">
     <div class="container">
       <div class="">
