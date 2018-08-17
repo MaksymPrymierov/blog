@@ -151,3 +151,19 @@ h1 {
 	border-radius: 5px;
 	cursor: pointer;
 }
+
+.input-block {
+  min-width: 30%;
+  padding: 6px 8px;
+  font-size: 16px;
+  line-height: 20px;
+  color: #24292e;
+  vertical-align: middle;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  border: 1px solid #d1d5da;
+  border-radius: 3px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

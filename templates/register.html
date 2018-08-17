@@ -1,35 +1,25 @@
-<!-- HEADER -->
-<header class="panel">
-  <div class="main-header container">
-    <ul class="menu-block">
-      <li><a class="btn" href="/">Main Page</a></li>
-      <li><a class="btn" href="/login">Log In</a></li>
-    </ul>
-    
-  </div>
-</header>
+{{ $data := . }}
+{{ template "header" $data }}
 
-
-<div class="content">
+<div class="content" align="center">
   <div class="container">
     <div >
       <h1>Register</h1>
-      <hr>
     </div>
   	<div class="con-content-panel con-pl-3 position-relative">
       
       <form class="post-form con-post" role="form" action="/register" accept-charset="UTF-8" method="POST">
         <div class="login-block">
-          <input type="email" id="email" class="form-control input-block input-contrast user-data" maxlength="60" name="email" aria-label="Email" placeholder="Your Email..." autocomplete="on" required>
+          <input type="email" id="email" class="input-block" maxlength="60" name="email" aria-label="Email" placeholder="Your Email..." autocomplete="on" required>
         </div>
         <div class="pass-block">
-          <input type="text" id="username" class="form-control input-block input-contrast user-data" maxlength="30" name="username" aria-label="Username" placeholder="User Name..." autocomplete="on" required>
+          <input type="text" id="username" class="input-block" maxlength="30" name="username" aria-label="Username" placeholder="User Name..." autocomplete="on" required>
         </div>
         <div class="pass-block">
-          <input type="password" id="password" class="form-control input-block input-contrast user-data" maxlength="120" name="password" aria-label="Password" placeholder="Your Password..." autocomplete="on" required>
+          <input type="password" id="password" class="input-block" maxlength="120" name="password" aria-label="Password" placeholder="Your Password..." autocomplete="on" required>
         </div>
-        <div class="post-elements post-end">
-          <button type="submit" class="btn float-left">Create User</button>
+        <div class="btn-block">
+          <button type="submit" class="btn btn-post">Create User</button>
         </div>
       <form>
 
