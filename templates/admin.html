@@ -1,28 +1,26 @@
 {{ $data := . }}
 {{ template "header" $data }}
 
-<div class="index flex-justify-between px-3 container-lg con-px-i">
-  <div class="con-info-index-panel con-pl-3 con-bb-2 position-relative">
+<div class="content">
+  <div class="container">
     <h1>Admin Panel</h1>
-  </div>
-  <div class="container-lg">
+    <hr>
+      <div class="left-panel">
+        <ul class="left-panel-button">
+          <li class="btns-left-panel">
+            <a class="btn btn-left-panel" href="/admin" title="Information panel">Information panel</a> 
+          </li>
+          <li class="btns-left-panel">
+            <a class="btn btn-left-panel" href="/admin" title="Users">Users</a> 
+          </li>
+        </ul>
+      </div>
 
-    <div class="admin-menu">
-      <ul class="list-style-none flex-wrap con-ml-3 f6 date">
-        <li class="mr-3 admin-btm">
-          <a href="/admin"><button type="botton" class="btn botton-box width-full">Information panel</button></a> 
-        </li>
-        <li class="mr-3 admin-btm">
-          <a href="/admin"><button type="botton" class="btn botton-box width-full">Users</button></a> 
-        </li>
-      </ul>
-    </div>
+      <div class="content-panel">
 
-    <div class="admin-content">
+        {{ template "infoserver" .}}
 
-      {{ template "infoserver" .}}
-
-    </div>
+      </div>
   </div>
 </div>
 
