@@ -168,3 +168,44 @@ h1 {
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
+
+.txt-red {
+	color: red;
+}
+.bgr-red {
+	background-color: red;
+}
+.border-red {
+	border: 1px solid red;
+	border-radius: 5px;
+}
+
+.txt-green {
+	color: green;
+}
+.bgr-green {
+	background-color: green;
+}
+
+.txt-blue {
+	color: blue;
+}
+.bgr-blue {
+	color: blue;
+}
+
+.txt-black {
+	color: black;
+}
+.bgr-black {
+	background-color: black;
+}
+
+.txt-white {
+	color: white;
+}
+.bgr-white {
+	background-color: white;
+}
+
