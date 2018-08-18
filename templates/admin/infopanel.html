@@ -1,8 +1,37 @@
 {{ block "infoserver" .}}
-<div class="admin-content-link">
-  <nav class="admin-content-nav" role="navigation">
-    <a href="/admin" class="admin-content-nav-link selected" aria-selected="true" role="tab" title="Admin">Server Information</a>
-    <a href="/admin" class="admin-content-nav-link" aria-selected="true" role="tab" title="Admin">{{ . }}</a>
-  </nav>
+<div class="data-content-panel">
+  <div class="data-nav-content-panel">
+    <nav class="btns-nav">
+      <a class="btn-nav btn" href="/admin" title="General information">General information</a>
+    </nav>
+  </div>
+  <div class="content">
+    <div class="info-block">
+      <h3>Server Info</h3> 
+      <hr>
+      <div class="info">
+        <h4>Work server</h4>
+        <ul>
+          <li>
+            <span>Uptime: 123</span>
+          </li>
+          <li>
+            <span>Open Files: 123</span>
+          </li>
+        </ul>
+      </div>
+      <div class="info">
+        <h4>Work server</h4>
+        <ul>
+          <li>
+            <span>Uptime: 123</span>
+          </li>
+          <li>
+            <span>Open Files: 123</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
 {{ end }}
