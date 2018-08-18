@@ -9,6 +9,10 @@
   	<div class="con-content-panel con-pl-3 position-relative">
       
       <form class="post-form con-post" role="form" action="/register" accept-charset="UTF-8" method="POST">
+
+        <div class="ip-block">
+          <input type="text" name="ip" id="ip" value="" style="display: none">
+        </div>
         <div class="login-block">
           <input type="email" id="email" class="input-block" maxlength="60" name="email" aria-label="Email" placeholder="Your Email..." autocomplete="on" required>
         </div>
@@ -16,10 +20,10 @@
           <input type="text" id="username" class="input-block" maxlength="30" name="username" aria-label="Username" placeholder="User Name..." autocomplete="on" required>
         </div>
         <div class="pass-block">
-          <input type="password" id="password" class="input-block" maxlength="120" name="password" aria-label="Password" placeholder="Your Password..." autocomplete="on" required>
+          <input type="password" id="password" class="input-block" maxlength="60" name="password" aria-label="Password" placeholder="Your Password..." autocomplete="on" required>
         </div>
         <div class="btn-block">
-          <button type="submit" class="btn btn-post">Create User</button>
+          <button type="submit" class="btn btn-post" id="btn-submit" disabled="true">Create User</button>
         </div>
       <form>
 
