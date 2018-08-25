@@ -1,0 +1,19 @@
+{{ $data := . }}
+{{ template "header" $data }}
+
+<div class="content" align="center">
+	<div class="container">
+		<p><b>Provide your subject and feedback:</b></p>
+		<form class="feedback" method="POST" action="feedback">
+			<div class="display-block mb-15">
+				<input type="text" name="feedback-subject" maxlength="128">
+			</div>
+			<div class="display-block mb-15">
+				<textarea placeholder="Something text..." cols="80" rows="12"></textarea>
+			</div>
+			<div class="display-block mb-15">
+				<input type="submit" name="btn btn-submit" value="Send">
+			</div>
+		</form>
+	</div>
+</div>
