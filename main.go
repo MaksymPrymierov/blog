@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/go-martini/martini"
 
-	"./routes"
+	"blog/routes"
 )
 
 func main() {
