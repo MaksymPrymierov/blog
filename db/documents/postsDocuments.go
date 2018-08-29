@@ -1,7 +1,7 @@
 package documents
 
 import (
-	"../../models"
+	"github.com/connor41/blog/models"
 )
 
 /* Structure for data base collection */

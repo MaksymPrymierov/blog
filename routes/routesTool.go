@@ -4,15 +4,14 @@ import (
 	"html/template"
 	"net/http"
 
+	"github.com/connor41/blog/db/users"
+	"github.com/connor41/blog/models"
+	"github.com/connor41/blog/session"
+	"github.com/connor41/blog/utils"
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
 	"gopkg.in/mgo.v2/bson"
 	"labix.org/v2/mgo"
-
-	"../db/users"
-	"../models"
-	"../session"
-	"../utils"
 )
 
 /* Global variables */

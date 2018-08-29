@@ -4,15 +4,14 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/connor41/blog/db/documents"
+	"github.com/connor41/blog/models"
+	"github.com/connor41/blog/models/data"
+	"github.com/connor41/blog/utils"
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
 	"github.com/microcosm-cc/bluemonday"
 	"gopkg.in/russross/blackfriday.v2"
-
-	"../db/documents"
-	"../models"
-	"../models/data"
-	"../utils"
 )
 
 /* Render write template */

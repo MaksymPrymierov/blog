@@ -1,7 +1,7 @@
 package session
 
 import (
-	"../utils"
+	"github.com/connor41/blog/utils"
 )
 
 /* Data stored session */
