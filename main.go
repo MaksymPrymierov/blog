@@ -1,9 +1,8 @@
 package main
 
 import (
+	"github.com/connor41/blog/routes"
 	"github.com/go-martini/martini"
-
-	"./routes"
 )
 
 func main() {

@@ -3,9 +3,8 @@ package routes
 import (
 	"net/http"
 
+	"github.com/connor41/blog/models/data"
 	"github.com/martini-contrib/render"
-
-	"../models/data"
 )
 
 /* Render admin template */

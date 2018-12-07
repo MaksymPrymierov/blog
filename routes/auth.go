@@ -4,10 +4,9 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/connor41/blog/models/data"
+	"github.com/connor41/blog/utils"
 	"github.com/martini-contrib/render"
-
-	"../models/data"
-	"../utils"
 )
 
 /* Render login template */

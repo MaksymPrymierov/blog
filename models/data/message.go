@@ -1,7 +1,7 @@
 package data
 
 import (
-	"../../models"
+	"github.com/connor41/blog/models"
 )
 
 type MessageData struct {

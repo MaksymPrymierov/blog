@@ -4,15 +4,14 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/connor41/blog/db/documents"
+	"github.com/connor41/blog/models"
+	"github.com/connor41/blog/models/data"
+	"github.com/connor41/blog/utils"
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
 	"github.com/microcosm-cc/bluemonday"
 	"gopkg.in/russross/blackfriday.v2"
-
-	"../db/documents"
-	"../models"
-	"../models/data"
-	"../utils"
 )
 
 /* Render write template */
@@ -58,7 +57,7 @@ func CreatePostHandler(rnd render.Render, r *http.Request) {
 
 	/* Convert markdown tegs in html tegs */
 	contentHTML := blackfriday.Run([]byte(contentMarkdown))
-	contentHTML = []byte(strings.Replace(string(contentHTML), "\n", " <br> ", -1))
+	contentHTML = []byte(strings.Replace(string(contentHTML), "\"", "\"", -1))
 
 	/* Get current time */
 	currentTime := models.GetCurrentTime()
@@ -117,7 +116,7 @@ func EditPostHandler(rnd render.Render, params martini.Params, r *http.Request) 
 	}
 
 	/* Replate html teg <br> on symbol '\n' */
-	post.ContentMarkdown = strings.Replace(post.ContentMarkdown, "<br>", "\n", -1)
+	//	post.ContentMarkdown = strings.Replace(post.ContentMarkdown, "<br>", "\n", -1)
 
 	/* Init PostsData */
 	data := data.PostsData{post, userData}

@@ -4,10 +4,9 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/connor41/blog/models/data"
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
-
-	"../models/data"
 )
 
 /* Array for messages */

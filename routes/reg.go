@@ -3,11 +3,10 @@ package routes
 import (
 	"net/http"
 
+	"github.com/connor41/blog/db/users"
+	"github.com/connor41/blog/models/data"
+	"github.com/connor41/blog/utils"
 	"github.com/martini-contrib/render"
-
-	"../db/users"
-	"../models/data"
-	"../utils"
 )
 
 /* Render register template */

@@ -7,12 +7,12 @@ import (
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
 
-	"../models/data"
+	"github.com/connor41/blog/models/data"
 )
 
 /* Array for errors */
 var errors = []string{
-	"Unknow error",                                         // id 0
+	"Unknow error", // id 0
 	"To access this page, you need to login.",              // id 1
 	"You are already authorized.",                          // id 2
 	"Not a valid password or login.",                       // id 3

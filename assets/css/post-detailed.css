@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700');
+
+.markdown-post {
+  font-family: 'Noto Sans', normal;
+  font-size: 16px;
+  line-height: 1.5;
+  word-wrap: break word;
+}
+
+.markdown-post h1,
+.markdown-post h2,
+.markdown-post h3,
+.markdown-post h4,
+.markdown-post h5,
+.markdown-post h6 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.markdown-post p,
+.markdown-post ul,
+.markdown-post ol,
+.markdown-post pre {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.markdown-post h1 {
+  padding-bottom: 0.3em;
+  font-size: 2em;
+  border-bottom: 1px solid #eaecef;
+}
+
+.markdown-post h2 {
+  padding-bottom: 0.3em;
+  font-size: 1.5em;
+  border-bottom: 1px solid #eaecef;
+}
+
+.markdown-post h3 {
+  font-size: 1.25em;
+}
+
+.markdown-post h4 {
+  font-size: lem;
+}
+
+.markdown-post h5 {
+  font-size: 0.875em;
+}
+
+.markdown-post h6 {
+  font-size: 0.85em;
+  color: #6a737d;
+}
+
+.markdown-post hr {
+  height: .25em;
+  padding: 0;
+  margin: 24px 0;
+  background-color: #e1e4e8;
+  border: 0;
+}
+
+.markdown-post ul,
+.markdown-post ol {
+  padding-left: 2em;
+}
+
+.markdown-post ul {
+  display: block;
+  list-style-type: disc;
+}
+
+.markdown-post ol {
+  display: block;
+  list-style-type: decimal;
+}
+
+.markdown-post li {
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-right: 0px;
+  font-style: normal;
+  color: #24292e;
+  word-wrap: break-word;
+  display: list-item;
+}
+
+.markdown-post pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f6f8fa;
+  border-radius: 3px;
+  word-wrap: normal;
+} 
+
+.markdown-post code {
+  font-family: 'Hack', monospace;
+}
+
+.markdown-post pre>code {
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
+  background-color: transparent;
+}
+
+.markdown-post pre code {
+  display: inline;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
