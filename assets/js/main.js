@@ -7,8 +7,8 @@ function regexpCheck(expration, testedString) {
 $(document).ready(function() { 
     
     let regMail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    let regName = /^[a-z0-9_-]{3,20}$/;
-    let regPass = /^[a-z0-9_-]{3,60}$/;
+    let regName = /^[a-zA-Z0-9_-]{3,30}$/;
+    let regPass = /^[a-zA-Z0-9_-]{3,60}$/;
     let userIP = "";
 
 

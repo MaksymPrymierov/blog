@@ -4,10 +4,23 @@ import (
 	"github.com/connor41/blog/models"
 )
 
-type AdminData struct {
-	UserData models.PublicUsersData
+type AdminPages struct {
+	InfoServer bool
+	Users      bool
 }
 
-func NewAdminData(UserData models.PublicUsersData) *AdminData {
-	return &AdminData{UserData}
+func NewAdminPages(InfoServer, Users bool) *AdminPages {
+	return &AdminPages{InfoServer, Users}
+}
+
+type AdminInfoServerData struct {
+	Pages    AdminPages
+	UserData models.Users
+	Day      int
+	Hour     int
+	Minute   int
+}
+
+func NewAdminInfoServerData(Pages AdminPages, UserData models.Users, Day, Hour, Minute int) *AdminInfoServerData {
+	return &AdminInfoServerData{Pages, UserData, Day, Hour, Minute}
 }
