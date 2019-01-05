@@ -3,7 +3,6 @@ package routes
 import (
 	"net/http"
 
-	"github.com/connor41/blog/models"
 	"github.com/connor41/blog/models/data"
 	"github.com/connor41/blog/utils"
 	"github.com/martini-contrib/render"
@@ -27,9 +26,7 @@ func AdminHandler(rnd render.Render, r *http.Request) {
 	info.Pages = data.AdminPages{
 		true, false,
 	}
-	info.UserData = models.Users{
-		userData.Id, "null", userData.Username, "null", userData.Permission,
-	}
+	info.UserData = userData
 	info.Day, info.Hour, info.Minute = utils.GetUptimeServer()
 
 	/* Render html template */
@@ -37,7 +34,7 @@ func AdminHandler(rnd render.Render, r *http.Request) {
 }
 
 func AdminUsersHandler(rnd render.Render, r *http.Request) {
-	userData, err := getPrivateCurrentUserData(r)
+	userData, err := getPublicCurrentUserData(r)
 	if err != nil {
 		getErrorHandler(rnd, 6)
 	}

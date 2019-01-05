@@ -1,10 +1,5 @@
 {{ block "infoserver" .}}
 <div class="data-content-panel">
-  <div class="data-nav-content-panel">
-    <nav class="btns-nav">
-      <a class="btn-nav btn" href="/admin" title="General information">General information</a>
-    </nav>
-  </div>
   <div class="content">
     <div class="info-block">
       <h3>Server Info</h3> 
@@ -14,20 +9,6 @@
         <ul>
           <li>
             <span>Uptime: {{ .Day }} Days {{ .Hour }}:{{ .Minute }} Time</span> 
-          </li>
-          <li>
-            <span>Open Files: 123</span>
-          </li>
-        </ul>
-      </div>
-      <div class="info">
-        <h4>Work server</h4>
-        <ul>
-          <li>
-            <span>Uptime: 123</span>
-          </li>
-          <li>
-            <span>Open Files: 123</span>
           </li>
         </ul>
       </div>

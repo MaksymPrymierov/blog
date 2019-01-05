@@ -40,6 +40,7 @@ func main() {
 
 	/* Admin Panel Routes */
 	m.Get("/admin", routes.AdminHandler)
+	m.Get("/admin/users", routes.AdminUsersHandler)
 
 	/* Listen port and run server*/
 	m.RunOnAddr(":80")

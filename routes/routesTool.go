@@ -18,6 +18,7 @@ import (
 var postsCollection *mgo.Collection  // Variable for posts
 var usersTables *mgo.Collection      // Variable for user
 var inMemorySession *session.Session // Variable for session
+//var serverStartupTime int
 
 /* Global const */
 const (
@@ -96,7 +97,7 @@ func getPrivateUserData(userId string) (models.Users, error) {
 	}
 
 	/* Init all user data */
-	privateUserData = models.Users{userId, user.Username, user.Email, user.Password, user.Permission}
+	privateUserData = models.Users{userId, user.Email, user.Username, user.Password, user.Permission}
 
 	return privateUserData, nil
 }

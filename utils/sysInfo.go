@@ -5,17 +5,25 @@ import (
 	"os"
 )
 
-func GetUptimeServer() (int, int, int) {
-	var day, hour, minute, data int
+func GetSecondUptime() int {
+	var second int
 
 	file, _ := os.Open("/proc/uptime")
 	defer file.Close()
 
-	fmt.Fscanf(file, "%d", &data)
+	fmt.Fscanf(file, "%d", &second)
 
-	day = ((data / 60) / 60) / 24
-	hour = ((data / 60) / 60) - (day * 60)
-	minute = (data / 60) - (hour * 60)
+	return second
+}
+
+func GetUptimeServer() (int, int, int) {
+	var day, hour, minute, second int
+	second = GetSecondUptime()
+
+	day = ((second / 60) / 60) / 24
+	hour = ((second / 60) / 60)
+	minute = (second / 60) - (hour * 60)
+	hour -= day * 24
 
 	return day, hour, minute
 }

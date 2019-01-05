@@ -15,12 +15,12 @@ func NewAdminPages(InfoServer, Users bool) *AdminPages {
 
 type AdminInfoServerData struct {
 	Pages    AdminPages
-	UserData models.Users
+	UserData models.PublicUsersData
 	Day      int
 	Hour     int
 	Minute   int
 }
 
-func NewAdminInfoServerData(Pages AdminPages, UserData models.Users, Day, Hour, Minute int) *AdminInfoServerData {
+func NewAdminInfoServerData(Pages AdminPages, UserData models.PublicUsersData, Day, Hour, Minute int) *AdminInfoServerData {
 	return &AdminInfoServerData{Pages, UserData, Day, Hour, Minute}
 }
