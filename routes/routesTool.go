@@ -136,3 +136,8 @@ func findUserOfData(typeData, data string) (interface{}, error) {
 	err := usersTables.Find(bson.M{typeData: data}).One(&result)
 	return result, err
 }
+
+func GetInfoUsers() int {
+	count, _ := usersTables.Count()
+	return count
+}

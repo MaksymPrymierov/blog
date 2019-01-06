@@ -3,6 +3,8 @@ package routes
 import (
 	"net/http"
 
+	"github.com/connor41/blog/db/users"
+	"github.com/connor41/blog/models"
 	"github.com/connor41/blog/models/data"
 	"github.com/connor41/blog/utils"
 	"github.com/martini-contrib/render"
@@ -39,13 +41,25 @@ func AdminUsersHandler(rnd render.Render, r *http.Request) {
 		getErrorHandler(rnd, 6)
 	}
 
-	var info data.AdminInfoServerData
+	var info data.AdminUsersData
 
 	info.Pages = data.AdminPages{
 		false, true,
 	}
 	info.UserData = userData
-	info.Day, info.Hour, info.Minute = 0, 0, 0
+
+	usersTable := []users.UsersTable{}
+	usersTables.Find(nil).All(&usersTable)
+	for _, data := range usersTable {
+		user := models.Users{
+			data.Id,
+			data.Email,
+			data.Username,
+			data.Password,
+			data.Permission,
+		}
+		info.UsersData = append(info.UsersData, user)
+	}
 
 	rnd.HTML(200, "admin", info)
 }

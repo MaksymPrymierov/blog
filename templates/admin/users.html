@@ -4,20 +4,22 @@
     <div class="info-block">
       <h3>Users</h3> 
       <hr>
+      {{ range $value := .UsersData }}
       <div class="info info-users">
-        <h4>Username</h4>
+        <h4>{{ $value.Username }}</h4>
         <ul>
           <li>
-            <span><b>Id</b> userId</span> 
+            <span><b>Id</b> {{ $value.Id }}</span> 
           </li>
           <li>
-            <span><b>Email</b> example@mail.com</span>
+            <span><b>Email</b> {{ $value.Email }}</span>
           </li>
           <li>
-            <span><b>Permission</b> user</span>
-          </li>
+            <span><b>Permission</b> {{ $value.Permission }}</span>
+          </li> 
         </ul>
       </div>
+      {{ end }}
     </div>
   </div>
 </div>

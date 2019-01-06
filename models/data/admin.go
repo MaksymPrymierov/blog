@@ -24,3 +24,13 @@ type AdminInfoServerData struct {
 func NewAdminInfoServerData(Pages AdminPages, UserData models.PublicUsersData, Day, Hour, Minute int) *AdminInfoServerData {
 	return &AdminInfoServerData{Pages, UserData, Day, Hour, Minute}
 }
+
+type AdminUsersData struct {
+	Pages     AdminPages
+	UserData  models.PublicUsersData
+	UsersData []models.Users
+}
+
+func NewAdminUsersData(Pages AdminPages, UserData models.PublicUsersData, UsersData []models.Users) *AdminUsersData {
+	return &AdminUsersData{Pages, UserData, UsersData}
+}
