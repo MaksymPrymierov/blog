@@ -99,20 +99,10 @@ func EditPostHandler(rnd render.Render, params martini.Params, r *http.Request) 
 	}
 
 	/* Init Post data, and check post id */
-	id := params["id"]
-	postDocument := documents.PostDocument{}
-	err = postsCollection.FindId(id).One(&postDocument)
+	post, err := getPostData(params["id"])
 	if err != nil {
 		getErrorHandler(rnd, 7)
 		return
-	}
-	post := models.Post{
-		postDocument.Id,
-		postDocument.Title,
-		postDocument.ContentHtml,
-		postDocument.ContentMarkdown,
-		postDocument.Time,
-		postDocument.Owner,
 	}
 
 	/* Replate html teg <br> on symbol '\n' */
@@ -131,20 +121,10 @@ func ReadPostHandler(rnd render.Render, params martini.Params, r *http.Request) 
 	userData, _ := getPublicCurrentUserData(r)
 
 	/* Init post data and check post id */
-	id := params["id"]
-	postDocument := documents.PostDocument{}
-	err := postsCollection.FindId(id).One(&postDocument)
+	post, err := getPostData(params["id"])
 	if err != nil {
 		getErrorHandler(rnd, 7)
 		return
-	}
-	post := models.Post{
-		postDocument.Id,
-		postDocument.Title,
-		postDocument.ContentHtml,
-		postDocument.ContentMarkdown,
-		postDocument.Time,
-		postDocument.Owner,
 	}
 
 	/* Init PostsData */
@@ -173,4 +153,24 @@ func DeletePostHandler(rnd render.Render, params martini.Params, r *http.Request
 
 	/* Redirect in main page */
 	rnd.Redirect("/")
+}
+
+func getPostData(id string) (models.Post, error) {
+	postDocument := documents.PostDocument{}
+	err := postsCollection.FindId(id).One(&postDocument)
+	if err != nil {
+		post := models.Post{}
+		return post, err
+	}
+
+	post := models.Post{
+		postDocument.Id,
+		postDocument.Title,
+		postDocument.ContentHtml,
+		postDocument.ContentMarkdown,
+		postDocument.Time,
+		postDocument.Owner,
+	}
+
+	return post, nil
 }

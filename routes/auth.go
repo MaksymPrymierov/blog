@@ -26,19 +26,9 @@ func GetLoginHandler(rnd render.Render, r *http.Request) {
 
 /* Create new user session */
 func PostLoginHandler(rnd render.Render, r *http.Request, w http.ResponseWriter) {
-	/* Check user sesssion */
-	if getCurrentUserId(r) != "" {
-		getErrorHandler(rnd, 2)
-		return
-	}
-
-	/* Init username */
-	username := r.FormValue("username")
-
-	/* Check len username */
-	if utils.CheckLen(username, 4, 30) != true {
-		getErrorHandler(rnd, 8)
-		return
+	errCode, username := checkUserData(r)
+	if errCode != 0 {
+		getErrorHandler(rnd, errCode)
 	}
 
 	/* Verification login */

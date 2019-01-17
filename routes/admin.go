@@ -70,39 +70,21 @@ func AdminUsersHandler(rnd render.Render, r *http.Request) {
 }
 
 func AdminDeleteUserHandler(rnd render.Render, params martini.Params, r *http.Request) {
-	userData, err := getPublicCurrentUserData(r)
-	if err != nil {
-		getErrorHandler(rnd, 6)
-	}
-
-	if userData.Permission != "admin" {
-		getErrorHandler(rnd, 6)
-	}
-
-	id := params["id"]
-	if id == "" {
-		getErrorHandler(rnd, 7)
+	err := checkAdminData(r, params)
+	if err != 0 {
+		getErrorHandler(rnd, err)
 		return
 	}
 
-	usersTables.RemoveId(id)
+	usersTables.RemoveId(params["id"])
 
 	rnd.Redirect("/admin/users")
 }
 
 func AdminUpdatePermission(rnd render.Render, params martini.Params, r *http.Request) {
-	userData, err := getPublicCurrentUserData(r)
-	if err != nil {
-		getErrorHandler(rnd, 6)
-	}
-
-	if userData.Permission != "admin" {
-		getErrorHandler(rnd, 6)
-	}
-
-	id := params["id"]
-	if id == "" {
-		getErrorHandler(rnd, 7)
+	err := checkAdminData(r, params)
+	if err != 0 {
+		getErrorHandler(rnd, err)
 		return
 	}
 
@@ -112,22 +94,31 @@ func AdminUpdatePermission(rnd render.Render, params martini.Params, r *http.Req
 }
 
 func AdminUpdateBan(rnd render.Render, params martini.Params, r *http.Request) {
-	userData, err := getPublicCurrentUserData(r)
-	if err != nil {
-		getErrorHandler(rnd, 6)
-	}
-
-	if userData.Permission != "admin" {
-		getErrorHandler(rnd, 6)
-	}
-
-	id := params["id"]
-	if id == "" {
-		getErrorHandler(rnd, 7)
+	err := checkAdminData(r, params)
+	if err != 0 {
+		getErrorHandler(rnd, err)
 		return
 	}
 
 	updateBan(params["id"])
 
 	rnd.Redirect("/admin/users")
+}
+
+func checkAdminData(r *http.Request, params martini.Params) int {
+	userData, err := getPublicCurrentUserData(r)
+	if err != nil {
+		return 6
+	}
+
+	if userData.Permission != "admin" {
+		return 6
+	}
+
+	id := params["id"]
+	if id == "" {
+		return 7
+	}
+
+	return 0
 }

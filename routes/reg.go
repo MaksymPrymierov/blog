@@ -9,6 +9,20 @@ import (
 	"github.com/martini-contrib/render"
 )
 
+func checkUserData(r *http.Request) (int, string) {
+	if getCurrentUserId(r) != "" {
+		return 2, "null"
+	}
+
+	username := r.FormValue("username")
+
+	if utils.CheckLen(username, 4, 30) != true {
+		return 8, "null"
+	}
+
+	return 0, username
+}
+
 /* Render register template */
 func GetRegisterHandler(rnd render.Render, r *http.Request) {
 	userData, err := getPublicCurrentUserData(r)
@@ -25,20 +39,9 @@ func GetRegisterHandler(rnd render.Render, r *http.Request) {
 
 /* Save user in database */
 func PostRegisterHandler(rnd render.Render, r *http.Request) {
-
-	/* Check user session */
-	if getCurrentUserId(r) != "" {
-		getErrorHandler(rnd, 2)
-		return
-	}
-
-	/* Write username */
-	username := r.FormValue("username")
-
-	/* Check len username */
-	if utils.CheckLen(username, 4, 30) != true {
-		getErrorHandler(rnd, 8)
-		return
+	errCode, username := checkUserData(r)
+	if errCode != 0 {
+		getErrorHandler(rnd, errCode)
 	}
 
 	/* Check username */
