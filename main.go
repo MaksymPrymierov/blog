@@ -41,6 +41,9 @@ func main() {
 	/* Admin Panel Routes */
 	m.Get("/admin", routes.AdminHandler)
 	m.Get("/admin/users", routes.AdminUsersHandler)
+	m.Get("/admin/deleteUser/:id", routes.AdminDeleteUserHandler)
+	m.Get("/admin/updatePermission/:id", routes.AdminUpdatePermission)
+	m.Get("/admin/updateBan/:id", routes.AdminUpdateBan)
 
 	/* Listen port and run server*/
 	m.RunOnAddr(":80")

@@ -7,6 +7,7 @@ import (
 	"github.com/connor41/blog/models"
 	"github.com/connor41/blog/models/data"
 	"github.com/connor41/blog/utils"
+	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
 )
 
@@ -41,6 +42,10 @@ func AdminUsersHandler(rnd render.Render, r *http.Request) {
 		getErrorHandler(rnd, 6)
 	}
 
+	if userData.Permission != "admin" {
+		getErrorHandler(rnd, 6)
+	}
+
 	var info data.AdminUsersData
 
 	info.Pages = data.AdminPages{
@@ -62,4 +67,67 @@ func AdminUsersHandler(rnd render.Render, r *http.Request) {
 	}
 
 	rnd.HTML(200, "admin", info)
+}
+
+func AdminDeleteUserHandler(rnd render.Render, params martini.Params, r *http.Request) {
+	userData, err := getPublicCurrentUserData(r)
+	if err != nil {
+		getErrorHandler(rnd, 6)
+	}
+
+	if userData.Permission != "admin" {
+		getErrorHandler(rnd, 6)
+	}
+
+	id := params["id"]
+	if id == "" {
+		getErrorHandler(rnd, 7)
+		return
+	}
+
+	usersTables.RemoveId(id)
+
+	rnd.Redirect("/admin/users")
+}
+
+func AdminUpdatePermission(rnd render.Render, params martini.Params, r *http.Request) {
+	userData, err := getPublicCurrentUserData(r)
+	if err != nil {
+		getErrorHandler(rnd, 6)
+	}
+
+	if userData.Permission != "admin" {
+		getErrorHandler(rnd, 6)
+	}
+
+	id := params["id"]
+	if id == "" {
+		getErrorHandler(rnd, 7)
+		return
+	}
+
+	updateUserPermission(params["id"])
+
+	rnd.Redirect("/admin/users")
+}
+
+func AdminUpdateBan(rnd render.Render, params martini.Params, r *http.Request) {
+	userData, err := getPublicCurrentUserData(r)
+	if err != nil {
+		getErrorHandler(rnd, 6)
+	}
+
+	if userData.Permission != "admin" {
+		getErrorHandler(rnd, 6)
+	}
+
+	id := params["id"]
+	if id == "" {
+		getErrorHandler(rnd, 7)
+		return
+	}
+
+	updateBan(params["id"])
+
+	rnd.Redirect("/admin/users")
 }

@@ -5,19 +5,26 @@
       <h3>Users</h3> 
       <hr>
       {{ range $value := .UsersData }}
-      <div class="info info-users">
-        <h4>{{ $value.Username }}</h4>
-        <ul>
-          <li>
-            <span><b>Id</b> {{ $value.Id }}</span> 
-          </li>
-          <li>
-            <span><b>Email</b> {{ $value.Email }}</span>
-          </li>
-          <li>
-            <span><b>Permission</b> {{ $value.Permission }}</span>
-          </li> 
-        </ul>
+      <div class="info">
+        <div class="post-shadow">
+          <div class="subject">
+            <h4>{{ $value.Username }}</h4>
+            <ul>
+              <li>
+                <span><b>Id</b> {{ $value.Id }}</span> 
+              </li>
+            <li>
+              <span><b>Email</b> {{ $value.Email }}</span>
+            </li>
+            <li>
+              <span><b>Permission</b> {{ $value.Permission }}</span>
+            </li> 
+          </ul>
+              <a class="btn btn-post" title="Delete User" href="/admin/deleteUser/{{ $value.Id }}">Delete User</a>
+              <a class="btn btn-post" title="Update Permission" href="/admin/updatePermission/{{ $value.Id }}">Update Permission</a>
+              <a class="btn btn-post" title="Update Ban" href="/admin/updateBan/{{ $value.Id }}">Update Ban</a>
+        </div>
+        </div>
       </div>
       {{ end }}
     </div>

@@ -37,7 +37,7 @@ html {
 body {
 	display: flex;
 	flex-direction: column;
-	/*height: 100%;*/
+/*	height: 100%;
 	/*position: relative;
     padding-bottom: 58px;
     box-sizing: border-box;*/
@@ -208,4 +208,3 @@ h1 {
 .bgr-white {
 	background-color: white;
 }
-

@@ -57,17 +57,33 @@ func Init() *martini.ClassicMartini {
 	return m
 }
 
-/*
-func UpdateUserPermission(rnd render.Render) {
+func updateUserPermission(id string) {
 	thisUser := users.UsersTable{}
-	usersTables.FindId("connor41").One(&thisUser)
+	usersTables.FindId(id).One(&thisUser)
 	oldUser := thisUser
-	thisUser.Permission = "admin"
-	usersTables.Update(oldUser, thisUser)
 
-	rnd.Redirect("http://google.com")
+	if thisUser.Permission == "admin" {
+		thisUser.Permission = "user"
+	} else {
+		thisUser.Permission = "admin"
+	}
+
+	usersTables.Update(oldUser, thisUser)
 }
-*/
+
+func updateBan(id string) {
+	thisUser := users.UsersTable{}
+	usersTables.FindId(id).One(&thisUser)
+	oldUser := thisUser
+
+	if thisUser.Permission == "banned" {
+		thisUser.Permission = "user"
+	} else {
+		thisUser.Permission = "banned"
+	}
+
+	usersTables.Update(oldUser, thisUser)
+}
 
 /* Function return id user of active current session */
 func getCurrentUserId(r *http.Request) string {
