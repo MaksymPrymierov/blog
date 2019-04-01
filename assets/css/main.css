@@ -8,7 +8,7 @@
 	/*fonts settings*/
 	--fontSizeNormal: 14px;
 	--fontSizeBigger: 18px;
-	--fontSizeSmaller: 10px;
+	--fontSizeSmaller: 11px;
 	--fontFamily: 'Open Sans', sans-serif;
 	--fontWeightNormal: 400;
 	--fontWeightBold: 700;
@@ -169,6 +169,7 @@ h1 {
   margin-bottom: 5px;
 }
 
+.main-Page
 
 .txt-red {
 	color: red;
@@ -179,6 +180,10 @@ h1 {
 .border-red {
 	border: 1px solid red;
 	border-radius: 5px;
+}
+
+.main-title {
+  font-size: 28px;
 }
 
 .txt-green {

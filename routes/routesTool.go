@@ -18,7 +18,7 @@ import (
 var postsCollection *mgo.Collection  // Variable for posts
 var usersTables *mgo.Collection      // Variable for user
 var inMemorySession *session.Session // Variable for session
-//var serverStartupTime int
+var commentCollection *mgo.Collection
 
 /* Global const */
 const (
@@ -39,6 +39,7 @@ func Init() *martini.ClassicMartini {
 	/* Connect collection from database */
 	postsCollection = session.DB("blog").C("posts")
 	usersTables = session.DB("blog").C("users")
+	commentCollection = session.DB("blog").C("comments")
 
 	/* Init martini framework */
 	m := martini.Classic()

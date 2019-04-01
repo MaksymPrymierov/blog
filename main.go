@@ -45,6 +45,9 @@ func main() {
 	m.Get("/admin/updatePermission/:id", routes.AdminUpdatePermission)
 	m.Get("/admin/updateBan/:id", routes.AdminUpdateBan)
 
+	m.Post("/createComment", routes.CreateCommentHandler)
+	m.Get("/deleteComment/:id", routes.DeleteCommentHandler)
+
 	/* Listen port and run server*/
 	m.RunOnAddr(":80")
 	m.Run()

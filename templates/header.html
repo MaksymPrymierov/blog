@@ -4,10 +4,8 @@
     <div class="main-header container">
       <ul class="menu-block">
         <li><a class="btn" href="/" title="Main Page">Main Page</a></li>
-        {{ if $data.UserData.Id }}
-        <li><a class="btn" href="/write" title="Write Post">Write Post</a></li>
-        {{ end }}
         {{ if $data.UserData.Permission | checkGroup }}
+        <li><a class="btn" href="/write" title="Write Post">Write Post</a></li>
         <li><a class="btn" href="/admin" title="Admin Panel">Admin Panel</a></li>
         {{ end }}
       </ul>

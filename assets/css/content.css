@@ -4,8 +4,6 @@
   padding-bottom: 200px;
 }
 
-
-
 .post-block {
 	min-height: 100%;
 }
@@ -65,4 +63,23 @@
 
 .post-date {
 
+}
+
+.buttons-block {
+	min-height: 100%;
+}
+
+.buttons {
+	width: 100%;
+	border: 1px solid #d1d5da;
+  background-color: #fff;
+	border-radius: 5px;
+	padding: 1px;
+	margin: 2px;
+}
+
+.buttons .subject {
+	display: flex;
+	justify-content: space-between;
+	width: 20%;
 }

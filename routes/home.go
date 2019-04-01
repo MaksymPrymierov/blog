@@ -24,6 +24,7 @@ func IndexHandler(rnd render.Render, r *http.Request) {
 			doc.ContentMarkdown,
 			doc.Time,
 			doc.Owner,
+			doc.Type,
 		}
 		posts = append(posts, post)
 	}

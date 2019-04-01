@@ -121,3 +121,13 @@
   background-color: transparent;
   border: 0;
 }
+
+.user-comment {
+  font-size: 85%;
+}
+
+.user-title {
+  font-size: 110%;
+  margin-top: 0;
+  font-weight: 600;
+}

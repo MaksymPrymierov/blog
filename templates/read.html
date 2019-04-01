@@ -7,7 +7,7 @@
         <hr>
       </div>
       <div class="btn-block">
-        {{ if $data.UserData.Id }}
+        {{ if $data.UserData.Permission | checkGroup }}
         <a class="btn btn-post" title="Edit Post" href="/editPost/{{$data.DataPosts.Id}}">Edit Post</a>
         <a class="btn btn-post" title="Delete Post" href="/deletePost/{{ $data.DataPosts.Id }}">Delete Post</a>
         {{ end }}
@@ -28,7 +28,43 @@
           <li class="post-time">
             <span class="text-gray">Time: {{$data.DataPosts.Time.Hour}}:{{$data.DataPosts.Time.Min}}:{{$data.DataPosts.Time.Sec}}</span>
           </li>
+          <li class="post-owner">
+            <span class="text-gray">Type: {{$data.DataPosts.Type}}</span>
+          </li>
         </ul>
+        <br>
+        {{ if $data.UserData.Permission | checkGroup }}
+        <form class="post-form con-post" role="form" action="/createComment" accept-charset="UTF-8" method="POST">
+      <input type="hidden" id="id" name="id">
+      <input type="hidden" id="postId" name="postId" value="{{$data.DataPosts.Id}}">
+      <input type="hidden" id="owner" name="owner" value="{{$data.UserData.Id}}">
+      <div class="post-elements">
+        <textarea id="content" class="text-area-block input-block" style="width: 80%;" rows="5" name="content" maxlength="2000"  placeholder="Write text of comment" aria-label="Write text of comment" wrap="soft | hard"></textarea>
       </div>
+      <div class="btn-block">
+        <button type="submit" class="btn btn-post">Create comment</button>
+      </div>
+    </form>
+              {{ end }}
+              {{ range $value := $data.Comment }}
+      <div class="post">
+      <div class="reader">
+        <article class="user-comment">
+          <p class="user-title"> {{ $value.Title }} </p>
+          <hr>
+          {{ $value.Content }}
+        </article>
+{{ if $data.UserData.Permission | checkGroup }}
+      <div class="btn-block">
+        </br>
+        <a class="btn btn-post" title="Delete Comment" href="/deleteComment/{{$value.Id}}">Delete Comment</a>
+      </div>
+{{ end }}
+              
+      </div>
+      </div>
+      {{ end }}
+      </div>
+    </div>
     </div>
   </div>

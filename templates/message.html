@@ -1,10 +1,11 @@
 {{ $data := . }}
 {{ template "header" $data }}
-<div class="index flex-justify-between px-3 container-lg con-px-i">
-  <div class="con-info-index-panel con-pl-3 con-bb-2 position-relative">
+
+<div class="content center">
+  <div class="container">
     <h1>Message</h1>
   </div>
-  <div class="con-content-panel con-pl-3 position-relative">
+  <div class="post subject">
     <p>{{ $data.Message }}</p>
   </div>
 </div>

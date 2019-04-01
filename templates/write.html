@@ -8,13 +8,14 @@
     <form class="post-form con-post" role="form" action="/createPost" accept-charset="UTF-8" method="POST">
       <input type="hidden" id="id" name="id" value="{{$data.DataPosts.Id}}">
       <input type="text" id="title" class="input-block" style="width: 100%;" maxlength="60" name="title" aria-label="Title post" placeholder="Title post..." autocomplete="off" value="{{$data.DataPosts.Title}}" required>
+      <input type="text" id="type" class="input-block" style="width: 100%;" maxlength="60" name="type" aria-label="Type post" placeholder="Type post..." autocomplete="off" value="{{$data.DataPosts.Type}}" required>
       <div class="post-elements">
         <textarea id="contentMarkdown" class="text-area-block input-block" style="width: 100%;" rows="17" name="contentMarkdown" maxlength="45000"  placeholder="Write text here" aria-label="Write text here" wrap="soft | hard">{{$data.DataPosts.ContentMarkdown}}</textarea>
       </div>
       <div class="btn-block">
         <button type="submit" class="btn btn-post">Save Post</button>
       </div>
-    <form>
-	</div>
+    </form>
+ 	</div>
   </div>
 </div>

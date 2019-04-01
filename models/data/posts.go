@@ -8,9 +8,10 @@ import (
 type PostsData struct {
 	DataPosts models.Post
 	UserData  models.PublicUsersData
+	Comment   []models.Comment
 }
 
 /* Init */
-func NewPostsData(DataPosts models.Post, UserData models.PublicUsersData) *PostsData {
-	return &PostsData{DataPosts, UserData}
+func NewPostsData(DataPosts models.Post, UserData models.PublicUsersData, Comment []models.Comment) *PostsData {
+	return &PostsData{DataPosts, UserData, Comment}
 }

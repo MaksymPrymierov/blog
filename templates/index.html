@@ -1,12 +1,27 @@
 {{ $data := . }}
 {{ template "header" $data }}
+  <title>Pictures (ConCalc)</title>
+  </head>
+
+  <body>
   <div class="content">
     <div class="container">
-
-      <div class="">
-        <h1>Main Page</h1>
+    <div class="">
+        <h1 class="main-title" >Pictures</h1>
         <hr>
+    </div>
+  <div class="buttons-block">
+    <div class="buttons">
+      <div class="subject">
+        <a class="btn btn-post btn-blocks" href="/" title="Test">Test</a>
+        <a class="btn btn-post btn-blocks" href="/" title="Test">Test</a>
+        <a class="btn btn-post btn-blocks" href="/" title="Test">Test</a>
+        <a class="btn btn-post btn-blocks" href="/" title="Test">Test</a>
+        <a class="btn btn-post btn-blocks" href="/" title="Test">Test</a>
       </div>
+    </div> 
+    </div>
+
 
       {{ range $value := $data.DataPosts }}
 
@@ -17,7 +32,7 @@
               <h2>{{ $value.Title }}</h2>
             </a>
             <div class="btn-block">
-              {{ if $data.UserData.Id }}
+              {{ if $data.UserData.Permission | checkGroup }}
               <a class="btn btn-post" title="Edit Post" href="/editPost/{{$value.Id}}">Edit Post</a>
               <a class="btn btn-post" title="Delete Post" href="/deletePost/{{ $value.Id }}">Delete Post</a>
               {{ end }}
@@ -29,6 +44,9 @@
             </li>
             <li class="post-date">
               <span class="text-gray">{{$value.Time.Month}} {{$value.Time.Day}}</span> 
+            </li>
+            <li class="post-owner">
+              <span class="text-gray">{{$value.Type}}</span>
             </li>
           </ul>
         </div>

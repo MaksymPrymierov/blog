@@ -11,6 +11,7 @@ import (
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
 	"github.com/microcosm-cc/bluemonday"
+	"gopkg.in/mgo.v2/bson"
 	"gopkg.in/russross/blackfriday.v2"
 )
 
@@ -23,11 +24,17 @@ func WriteHandler(rnd render.Render, r *http.Request) {
 		return
 	}
 
+	if userData.Permission != "admin" {
+		getErrorHandler(rnd, 6)
+		return
+	}
+
 	/* Init post data */
 	post := models.Post{}
+	comment := []models.Comment{}
 
 	/* Init PostsData */
-	data := data.PostsData{post, userData}
+	data := data.PostsData{post, userData, comment}
 
 	/* Render html template */
 	rnd.HTML(200, "write", data)
@@ -42,6 +49,11 @@ func CreatePostHandler(rnd render.Render, r *http.Request) {
 		return
 	}
 
+	if userData.Permission != "admin" {
+		getErrorHandler(rnd, 6)
+		return
+	}
+
 	/* Init and setting html cleaner */
 	p := bluemonday.NewPolicy()
 	p.AllowStandardURLs()
@@ -50,14 +62,19 @@ func CreatePostHandler(rnd render.Render, r *http.Request) {
 	/* Write data of form */
 	id := r.FormValue("id")
 	title := r.FormValue("title")
+	typePost := r.FormValue("type")
 	contentMarkdown := r.FormValue("contentMarkdown")
+
+	/* Text preprocessing */
+	contentMarkdown = strings.Replace(string(contentMarkdown), "<", "&lt;", -1)
+	contentMarkdown = strings.Replace(string(contentMarkdown), ">", "&gt;", -1)
 
 	/* Clear html tegs in text which textarea */
 	contentMarkdown = p.Sanitize(contentMarkdown)
 
 	/* Convert markdown tegs in html tegs */
 	contentHTML := blackfriday.Run([]byte(contentMarkdown))
-	contentHTML = []byte(strings.Replace(string(contentHTML), "\"", "\"", -1))
+	contentHTML = []byte(strings.Replace(string(contentHTML), "amp;", "", -1))
 
 	/* Get current time */
 	currentTime := models.GetCurrentTime()
@@ -70,6 +87,7 @@ func CreatePostHandler(rnd render.Render, r *http.Request) {
 		contentMarkdown,
 		currentTime,
 		userData.Username,
+		typePost,
 	}
 
 	/* Write data posts in data base */
@@ -90,11 +108,18 @@ func CreatePostHandler(rnd render.Render, r *http.Request) {
 	rnd.Redirect("/")
 }
 
+/* Save post in database */
+
 /* Render edite template */
 func EditPostHandler(rnd render.Render, params martini.Params, r *http.Request) {
 	userData, err := getPublicCurrentUserData(r)
 	if err != nil {
 		getErrorHandler(rnd, 1)
+		return
+	}
+
+	if userData.Permission != "admin" {
+		getErrorHandler(rnd, 6)
 		return
 	}
 
@@ -105,11 +130,29 @@ func EditPostHandler(rnd render.Render, params martini.Params, r *http.Request) 
 		return
 	}
 
-	/* Replate html teg <br> on symbol '\n' */
-	//	post.ContentMarkdown = strings.Replace(post.ContentMarkdown, "<br>", "\n", -1)
+	commentsDocument := []documents.CommentsDocument{}
+	commentCollection.FindId(params["id"]).All(&commentsDocument)
+
+	comments := []models.Comment{}
+	for _, doc := range commentsDocument {
+		comment := models.Comment{
+			doc.Id,
+			doc.PostId,
+			doc.Title,
+			doc.Content,
+			doc.Time,
+			doc.Owner,
+		}
+		comments = append(comments, comment)
+	}
+
+	/* Text preprocessing */
+	post.ContentMarkdown = strings.Replace(post.ContentMarkdown, "&lt;", "<", -1)
+	post.ContentMarkdown = strings.Replace(post.ContentMarkdown, "&gt;", ">", -1)
+	post.ContentMarkdown = strings.Replace(post.ContentMarkdown, "&#34;", "\"", -1)
 
 	/* Init PostsData */
-	data := data.PostsData{post, userData}
+	data := data.PostsData{post, userData, comments}
 
 	/* Render html template */
 	rnd.HTML(200, "write", data)
@@ -127,8 +170,24 @@ func ReadPostHandler(rnd render.Render, params martini.Params, r *http.Request) 
 		return
 	}
 
+	commentsDocument := []documents.CommentsDocument{}
+	commentCollection.Find(bson.M{"_postId": params["id"]}).All(&commentsDocument)
+
+	comments := []models.Comment{}
+	for _, doc := range commentsDocument {
+		comment := models.Comment{
+			doc.Id,
+			doc.PostId,
+			doc.Title,
+			doc.Content,
+			doc.Time,
+			doc.Owner,
+		}
+		comments = append(comments, comment)
+	}
+
 	/* Init PostsData */
-	data := data.PostsData{post, userData}
+	data := data.PostsData{post, userData, comments}
 
 	rnd.HTML(200, "read", data)
 }
@@ -136,8 +195,14 @@ func ReadPostHandler(rnd render.Render, params martini.Params, r *http.Request) 
 /* Delete post from database */
 func DeletePostHandler(rnd render.Render, params martini.Params, r *http.Request) {
 	/* Check user session */
-	if getCurrentUserId(r) == "" {
+	userData, err := getPublicCurrentUserData(r)
+	if err != nil {
 		getErrorHandler(rnd, 1)
+		return
+	}
+
+	if userData.Permission != "admin" {
+		getErrorHandler(rnd, 6)
 		return
 	}
 
@@ -170,7 +235,66 @@ func getPostData(id string) (models.Post, error) {
 		postDocument.ContentMarkdown,
 		postDocument.Time,
 		postDocument.Owner,
+		postDocument.Type,
 	}
 
 	return post, nil
+}
+
+func DeleteCommentHandler(rnd render.Render, params martini.Params, r *http.Request) {
+	_, err := getPublicCurrentUserData(r)
+	if err != nil {
+		getErrorHandler(rnd, 1)
+		return
+	}
+
+	id := params["id"]
+	if id == "" {
+		getErrorHandler(rnd, 7)
+		return
+	}
+
+	commentCollection.RemoveId(id)
+
+	rnd.Redirect("/")
+}
+
+func CreateCommentHandler(rnd render.Render, r *http.Request) {
+	/* Get data in current user session */
+	userData, err := getPublicCurrentUserData(r)
+	if err != nil {
+		getErrorHandler(rnd, 1)
+		return
+	}
+
+	/* Write data of form */
+	postId := r.FormValue("postId")
+	title := r.FormValue("owner")
+	content := r.FormValue("content")
+
+	/* Get current time */
+	currentTime := models.GetCurrentTime()
+
+	/* Init posts data */
+	commentDocument := documents.CommentsDocument{
+		"",
+		postId,
+		title,
+		content,
+		currentTime,
+		userData.Username,
+	}
+
+	/* Write data posts in data base */
+	id := utils.GenerateNameId(postId)
+	commentDocument.Id = id
+	err = commentCollection.Insert(commentDocument)
+	for err != nil {
+		id = id + "c"
+		commentDocument.Id = id
+		err = commentCollection.Insert(commentDocument)
+	}
+
+	/* Redirect in main page */
+	rnd.Redirect("/")
 }

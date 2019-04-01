@@ -12,4 +12,14 @@ type PostDocument struct {
 	ContentMarkdown string
 	Time            models.CurrentTime
 	Owner           string
+	Type            string
+}
+
+type CommentsDocument struct {
+	Id      string `bson:"_id,omitempty"`
+	PostId  string `bson:"_postId,omitempty"`
+	Title   string
+	Content string
+	Time    models.CurrentTime
+	Owner   string
 }
