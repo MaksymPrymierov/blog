@@ -3,7 +3,7 @@ package routes
 import (
 	"net/http"
 
-	"github.com/connor41/blog/models/data"
+	"github.com/MaksymPrymierov/blog/models/data"
 	"github.com/martini-contrib/render"
 )
 

@@ -7,7 +7,7 @@ import (
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
 
-	"github.com/connor41/blog/models/data"
+	"github.com/MaksymPrymierov/blog/models/data"
 )
 
 /* Array for errors */

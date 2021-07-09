@@ -3,9 +3,9 @@ package routes
 import (
 	"net/http"
 
-	"github.com/connor41/blog/db/users"
-	"github.com/connor41/blog/models/data"
-	"github.com/connor41/blog/utils"
+	"github.com/MaksymPrymierov/blog/db/users"
+	"github.com/MaksymPrymierov/blog/models/data"
+	"github.com/MaksymPrymierov/blog/utils"
 	"github.com/martini-contrib/render"
 )
 

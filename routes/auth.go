@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/connor41/blog/models/data"
-	"github.com/connor41/blog/utils"
+	"github.com/MaksymPrymierov/blog/models/data"
+	"github.com/MaksymPrymierov/blog/utils"
 	"github.com/martini-contrib/render"
 )
 

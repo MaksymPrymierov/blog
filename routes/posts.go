@@ -4,14 +4,14 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/connor41/blog/db/documents"
-	"github.com/connor41/blog/models"
-	"github.com/connor41/blog/models/data"
-	"github.com/connor41/blog/utils"
+	"github.com/MaksymPrymierov/blog/db/documents"
+	"github.com/MaksymPrymierov/blog/models"
+	"github.com/MaksymPrymierov/blog/models/data"
+	"github.com/MaksymPrymierov/blog/utils"
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
 	"github.com/microcosm-cc/bluemonday"
-	"gopkg.in/russross/blackfriday.v2"
+	"github.com/russross/blackfriday/v2"
 )
 
 /* Render write template */
